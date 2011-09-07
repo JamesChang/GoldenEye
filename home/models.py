@@ -126,7 +126,11 @@ class SinaWeibo(models.Model):
             escaped.append(c.weiboid)
             try:
               handle_exception(c, e)
-            except Exception:
+            except Exception ,e2:
+              if hasattr(e2,"code"):
+                code = e2.code
+                if e2.code == '40304':
+                  return
               pass
 
 
