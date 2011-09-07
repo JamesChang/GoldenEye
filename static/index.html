@@ -1,0 +1,498 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" type="text/css" href="style/default.css">
+        <!--[if lte IE 7]>
+            <link rel="stylesheet" type="text/css" href="style/ie.css">
+        <![endif]-->
+        <link type="text/css" rel="stylesheet" href="http://tjs.sjs.sinajs.cn/t3/style/css/common/card.css" />
+        <script type="text/javascript" src="script/javascript-packed.js">
+        </script>
+        <script type="text/javascript" src="script/httpRequest.js">
+        </script>
+        <script type="text/javascript" src="script/common.js">
+        </script>
+        <script type="text/javascript" src="script/loadModule.js">
+        </script>
+        <script type="text/javascript" src="script/component.js">
+        </script>
+        <script type="text/javascript" src="script/page/index.js">
+        </script>
+        <script type="text/javascript" src="http://tjs.sjs.sinajs.cn/t3/platform/js/api/wb.js" charset="utf-8">
+        </script>
+        <title>听我说 - 发现潜在粉丝 让中国听你说</title>
+    </head>
+    <body id="search">
+        <div class="content">
+            <div class="tip">
+                <p class="tipLabel">
+                    太棒了！为您新发现了 <span class="highlight">50</span>
+                    位对话题感兴趣的潜在粉丝，建议立即关注他们！
+                </p>
+                <div class="count">
+                    <div class="numberBoard followNumber">
+                        <span class="number no0"></span>
+                        <span class="number no0"></span>
+                        <span class="number no0"></span>
+                        <p>
+                            今日已关注
+                        </p>
+                    </div>
+                    <div class="slash">
+                    </div>
+                    <div class="numberBoard foundDailyNumber">
+                        <span class="number no0"></span>
+                        <span class="number no5"></span>
+                        <span class="number no0"></span>
+                        <p>
+                            今日人选总数
+                        </p>
+                    </div>
+                </div>
+                <div class="controlBox">
+                    <a class="normalButton followAll" href="#">立即关注全部</a>
+                </div>
+                <br class="clear"/>
+            </div>
+            <div class="primary">
+                <div class="operateBar top">
+                    <div class="buttonBox">
+                        <div class="button checkboxOp dropdownHandle">
+                            <input type="checkbox">
+                        </div>
+                        <ul class="dropdownList">
+                            <li>
+                                <a href="#">未处理</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="buttonBox">
+                        <div class="button normalBtn followHandle">
+                            关注
+                        </div>
+                        <div class="button dropdownBtn dropdownHandle">
+                        </div>
+                        <ul class="dropdownList">
+                            <li>
+                                <a href="#" class="unfollowHandle">取消关注</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="buttonBox">
+                        <div class="button normalBtn manageHandle">
+                            托管
+                        </div>
+                        <div class="button dropdownBtn dropdownHandle">
+                        </div>
+                        <ul class="dropdownList">
+                            <li>
+                                <a href="#" class="unmanageHandle">取消托管</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--
+                    <div class="buttonBox">
+                    <div class="button tagsFilterBtn dropdownHandle">
+                    标签过滤
+                    </div>
+                    <ul class="dropdownList">
+                    <li>
+                    <a href="#" class="radioButton followGroup"><span></span>关注</a>
+                    <a href="#" class="radioButton followGroup"><span></span>被关注</a>
+                    <a href="#" class="radioButton followGroup"><span></span>互关注</a>
+                    </li>
+                    <li class="divideLine">
+                    </li>
+                    <li>
+                    <a href="#" class="radioButton manageGroup"><span></span>托管</a>
+                    <a href="#" class="radioButton manageGroup"><span></span>不托管</a>
+                    </li>
+                    <li class="divideLineSolid">
+                    </li>
+                    <li>
+                    <a href="#">应用</a>
+                    </li>
+                    </ul>
+                    </div>
+                    -->
+                    <div class="buttonBox nameSearch">
+                        <div class="button tagsFilterBtn dropdownHandle">
+                            昵称搜索
+                        </div>
+                        <ul class="dropdownList">
+                            <li>
+                                <input type="text">
+                            </li>
+                            <li class="divideLineSolid">
+                            </li>
+                            <li>
+                                <a href="#">搜索</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="buttonBox pageBtn">
+                        <div class="button prevPage prev">
+                        </div>
+                        <div class="button nextPage next">
+                        </div>
+                    </div>
+                    <div class="itemNum">
+                    </div>
+                </div>
+                <div class="mainContent">
+                    <!--
+                    <span class="noResult">还没找到符合的人选，请耐心等待。也可尝试修改关键词。</span>
+                    --><!--
+                    <table>
+                    <colgroup>
+                    <col class="checkbox" /><col class="nickname" /><col class="tag" /><col class="summary" />
+                    </colgroup>
+                    <tbody>
+                    <tr class="unread">
+                    <td>
+                    <input type="checkbox">
+                    </td>
+                    <td class="name">
+                    lupin_cn
+                    </td>
+                    <td>
+                    <span></span>
+                    <span></span>
+                    </td>
+                    <td>
+                    正在努力寻找关于正在努力寻找关于正在努力寻找关于找关于正在努力寻找关于找关于正在努……
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>
+                    <input type="checkbox">
+                    </td>
+                    <td>
+                    lupin_cn
+                    </td>
+                    <td>
+                    <span class="tags follow"></span>
+                    <span class="tags mandatory"></span>
+                    </td>
+                    <td>
+                    正在努力寻找关于正在努力寻找关于正在努力寻找关于找关于正在努力寻找关于找关于正在努……
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                    -->
+                </div>
+                <div class="operateBar bottom">
+                    <div class="buttonBox">
+                        <div class="button checkboxOp dropdownHandle">
+                            <input type="checkbox">
+                        </div>
+                        <ul class="dropdownList">
+                            <li>
+                                <a href="#">未处理</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="buttonBox">
+                        <div class="button normalBtn followHandle">
+                            关注
+                        </div>
+                        <div class="button dropdownBtn dropdownHandle">
+                        </div>
+                        <ul class="dropdownList">
+                            <li>
+                                <a href="#" class="unfollowHandle">取消关注</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="buttonBox">
+                        <div class="button normalBtn manageHandle">
+                            托管
+                        </div>
+                        <div class="button dropdownBtn dropdownHandle">
+                        </div>
+                        <ul class="dropdownList">
+                            <li>
+                                <a href="#" class="unmanageHandle">取消托管</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--
+                    <div class="buttonBox">
+                    <div class="button tagsFilterBtn dropdownHandle">
+                    标签过滤
+                    </div>
+                    <ul class="dropdownList">
+                    <li>
+                    <a href="#" class="radioButton followGroup"><span></span>关注</a>
+                    <a href="#" class="radioButton followGroup"><span></span>被关注</a>
+                    <a href="#" class="radioButton followGroup"><span></span>互关注</a>
+                    </li>
+                    <li class="divideLine">
+                    </li>
+                    <li>
+                    <a href="#" class="radioButton manageGroup"><span></span>托管</a>
+                    <a href="#" class="radioButton manageGroup"><span></span>不托管</a>
+                    </li>
+                    <li class="divideLineSolid">
+                    </li>
+                    <li>
+                    <a href="#">应用</a>
+                    </li>
+                    </ul>
+                    </div>
+                    -->
+                    <div class="buttonBox nameSearch">
+                        <div class="button tagsFilterBtn dropdownHandle">
+                            昵称搜索
+                        </div>
+                        <ul class="dropdownList">
+                            <li>
+                                <input type="text">
+                            </li>
+                            <li class="divideLineSolid">
+                            </li>
+                            <li>
+                                <a href="#">搜索</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="buttonBox pageBtn">
+                        <div class="button prevPage prev">
+                        </div>
+                        <div class="button nextPage next">
+                        </div>
+                    </div>
+                    <div class="itemNum">
+                    </div>
+                </div>
+            </div>
+            <div class="secondary">
+                <div class="mainFilter">
+                    <ul>
+                        <li>
+                            <a href="#" id="indexHandle" class="selected">人选</a>
+                        </li>
+                        <li>
+                            <a href="#" id="followHandle">关注</a>
+                        </li>
+                        <li>
+                            <a href="#" id="followBackHandle">粉丝</a>
+                        </li>
+                        <li>
+                            <a href="#" id="followMutualHandle">互相关注</a>
+                        </li>
+                        <li>
+                            <a href="#" id="manageHandle">托管</a>
+                        </li>
+                        <li>
+                            <a href="#" id="unmanageHandle">不托管</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="searchKeyword">
+                    <!--
+                    <h3>正在努力寻找关于</h3>
+                    <ul class="tagsList">
+                    <li class="tag blue">
+                    <span class="label">音乐盒</span>
+                    </li>
+                    <li class="tag blue">
+                    <span class="label">田子坊</span>
+                    </li>
+                    <li class="tag green">
+                    <span class="label">上海</span>
+                    </li>
+                    <li class="tag blue">
+                    <span class="label">上海</span>
+                    </li>
+                    </ul>
+                    <h3>正在努力发现关于</h3>
+                    <ul class="tagsList">
+                    <li class="tag">
+                    <span class="label">音乐盒</span>
+                    <span class="level"></span>
+                    <br class="clear"/>
+                    </li>
+                    <li class="tag">
+                    <span class="label">音乐盒</span>
+                    <span class="level"></span>
+                    <br class="clear"/>
+                    </li>
+                    <li class="tag">
+                    <span class="label">音乐盒</span>
+                    <span class="level"></span>
+                    <br class="clear"/>
+                    </li>
+                    <li class="tag">
+                    <span class="label">音乐盒</span>
+                    <span class="level"></span>
+                    <br class="clear"/>
+                    </li>
+                    <li class="tag">
+                    <span class="label">音乐盒</span>
+                    <span class="level"></span>
+                    <br class="clear"/>
+                    </li>
+                    <li class="tag">
+                    <span class="label">音乐盒</span>
+                    <span class="level"></span>
+                    <br class="clear"/>
+                    </li>
+                    </ul>-->
+                </div>
+                <!--
+                <div class="unread">
+                <h3>等待关注的粉丝</h3>
+                <div class="numberBoard">
+                <span class="number no0"></span>
+                <span class="number no4"></span>
+                <span class="number no5"></span>
+                </div>
+                </div>
+                <div class="todayFollow">
+                <h3>今日已关注</h3>
+                <div class="numberBoard">
+                <span class="number no1"></span>
+                <span class="number no2"></span>
+                <span class="number no3"></span>
+                </div>
+                </div>
+                --><!--
+                <div>
+                <button class="wizard">
+                向导
+                </button>
+                </div>
+                -->
+            </div>
+            <br class="clear" />
+        </div>
+        <div class="popup" id="wizardPanel">
+            <div class="sliderBox">
+                <ul class="slider">
+                    <li class="page1">
+                        <div class="body">
+                            <div class="welcome">
+                            </div>
+                        </div>
+                        <ul class="buttonBar">
+                            <li>
+                                <a class="okButton normalButton" href="#">开始使用</a>
+                            </li>
+                            <br class="clear"/>
+                        </ul>
+                    </li>
+                    <li class="page2">
+                        <div class="body">
+                            <div class="instruction">
+                                <h3>如何添加话题？</h3>
+                                <ul>
+                                    <li>
+                                        每个话题使用回车确定。
+                                    </li>
+                                    <li>
+                                        需要针对地域筛选，可填写正确的省市名称。
+                                    </li>
+                                    <li>
+                                        尽量使用有特色的话题以提高寻找效率。
+                                    </li>
+                                    <li>
+                                        可在后期使用过程中不断进行修正及优化。
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="instruction">
+                                <h3>话题示例</h3>
+                                <ul>
+                                    <li>
+                                        星巴克 咖啡 周边 随行杯 马克杯
+                                    </li>
+                                    <li>
+                                        八音盒 音乐盒 上海市 田子坊
+                                    </li>
+                                </ul>
+                            </div>
+                            <br class="clear"/>
+                            <div class="searchBox">
+                                <h3>我想要寻找关于</h3>
+                                <div class="searchKeyword">
+                                    <ul class="tagsList">
+                                    </ul>
+                                    <a href="#" class="addKeyword">+添加话题</a>
+                                    <input class="inputKeyword" type="text"/>
+                                    <br class="clear"/>
+                                    <p class="errorTip">
+                                        至少需要填写一个话题。
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="buttonBar">
+                            <li>
+                                <a class="okButton normalButton" href="#">保存并开始寻找</a>
+                            </li>
+                            <br class="clear"/>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="popup" id="updateKeywordPanel">
+            <div class="body">
+                <div class="instruction">
+                    <h3>如何添加话题？</h3>
+                    <ul>
+                        <li>
+                            每个话题使用回车确定。
+                        </li>
+                        <li>
+                            需要针对地域筛选，可填写正确的省市名称。
+                        </li>
+                        <li>
+                            尽量使用有特色的话题以提高寻找效率。
+                        </li>
+                        <li>
+                            可在后期使用过程中不断进行修正及优化。
+                        </li>
+                    </ul>
+                </div>
+                <div class="instruction">
+                    <h3>话题示例</h3>
+                    <ul>
+                        <li>
+                            星巴克 咖啡 周边 随行杯 马克杯
+                        </li>
+                        <li>
+                            八音盒 音乐盒 上海市 田子坊
+                        </li>
+                    </ul>
+                </div>
+                <br class="clear"/>
+                <div class="searchBox">
+                    <h3>我想要寻找关于</h3>
+                    <div class="searchKeyword">
+                        <ul class="tagsList">
+                        </ul>
+                        <a href="#" class="addKeyword">+添加话题</a>
+                        <input class="inputKeyword" type="text"/>
+                        <br class="clear"/>
+                        <p class="errorTip">
+                            至少需要填写一个话题。
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <ul class="buttonBar">
+                <li>
+                    <a class="okButton normalButton" href="#">保存并开始寻找</a>
+                </li>
+                <li>
+                    <a class="cancelButton normalButton" href="#">取消</a>
+                </li>
+                <br class="clear"/>
+            </ul>
+        </div>
+    </body>
+</html>

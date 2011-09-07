@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block main %}
+<ul>
+<li>候选：{{candidate_count}}</li>
+<li>托管：{{managed_count}}</li>
+
+</ul>
+
+<hr/>
+<h2>搜索并添加</h2>
+<form action="#">
+  <p> 关键字: <input name="q" /> </p>
+  <input type="hidden" name="action" value="search"/>
+  <p><input type="submit" /></p>
+</form>
+
+
+<hr/>
+<h2>关注</h2>
+<form action="#">
+  <input type="hidden" name="action" value="followall"/>
+  <p><input type="submit" value="关注所有"/></p>
+</form>
+
+<form action="#">
+  <input type="hidden" name="action" value="clearall"/>
+  <p><input type="submit" value="清除所有"/></p>
+</form>
+
+{% endblock %}

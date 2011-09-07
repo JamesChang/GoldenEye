@@ -1,0 +1,52 @@
+/*
+ inline-block fixed
+ */
+#login .loginBg ul, #login .loginBg ul a, .header .headerControl, .number, .tags, .account .accountList li, .popup .buttonBar .okButton, .popup .buttonBar, .deleteButton, .searchBox .searchKeyword #addKeyword, .tagsList li, .tip .count {
+    zoom: 1;
+    display: inline;
+}
+
+.tags {
+    margin-right: 2px;
+}
+
+.checkboxOp input {
+    margin-left: -15px;
+    margin-top: 0;
+}
+
+.primary .mainContent table td {
+    border-bottom: 1px solid #bfbfbf;
+    padding: 0;
+}
+
+.primary .mainContent table {
+    table-layout: fixed;
+}
+
+.primary .mainContent table tr:first-child td {
+    border-top: 1px solid #bfbfbf;
+}
+
+.divideLineSolid, .divideLine {
+    height: 2px;
+    line-height: 2px;
+}
+
+#setting .primary div {
+    margin-bottom: 50px;
+}
+
+#setting .primary #followSettingForm input {
+    position: relative;
+    top: -25px;
+}
+
+.header .headerControl ul.userBar li a {
+    position: relative;
+    top: 3px;
+}
+
+.tip {
+    height: 180px;
+}
