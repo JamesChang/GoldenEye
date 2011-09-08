@@ -15,9 +15,9 @@ def run():
   apm = 10
   sleeping_time = 60/apm
   
-  threshold = datetime.datetime.now()- datetime.timedelta(1)
 
   while(True):
+    threshold = datetime.datetime.now()- datetime.timedelta(1)
 
     qs = Candidate.objects.filter(managed__isnull=False).filter(update_date__lte=threshold)
     qs = qs[:100]
