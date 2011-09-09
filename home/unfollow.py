@@ -15,9 +15,10 @@ def run():
   apm = 2
   sleeping_time = 60/2
   
-  threshold = datetime.datetime.now()- datetime.timedelta(7)
 
   while(True):
+
+    threshold = datetime.datetime.now()- datetime.timedelta(7)
 
     qs = Candidate.objects.filter(managed=True).filter(following=True).filter(follow_date__lte=threshold)
     qs = qs[:100]
