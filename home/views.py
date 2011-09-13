@@ -196,6 +196,7 @@ def candidate_vo(obj):
             'followed_back':True if obj.followed_back else False,
             'managed': obj.managed,
             'text':obj.text,
+            'commented': obj.been_commented(),
             }
 
 def page_vo(paginator, page):
@@ -406,4 +407,24 @@ def daily_follow(request):
     except Candidate.OutOfQuota:
         return make_json_response(request, code=419001)
     return make_json_response(request)
+
+
+class CandidateCommentForm(CandidatesForm):
+    text = forms.CharField()
+    retweet = forms.BooleanField(required=False)
+
+@rest_login_required
+@apply_form(CandidateCommentForm)
+def comment(request, form):
+    ids = form.cleaned_data['candidates']    
+    for i in ids:
+        weiboid, userid = i.split('-')
+        c = Candidate.get_by_id(userid, weiboid)
+        if c is None: continue
+        c.comment(form.cleaned_data['text'], form.cleaned_data['retweet'])
+        c.managed=True
+        c.save()
+    return make_json_response(request)
+    
+
 

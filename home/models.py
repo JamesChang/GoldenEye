@@ -211,7 +211,11 @@ class Candidate(models.Model):
   followed_back_date = models.DateTimeField(null=True)
   managed = models.NullBooleanField()
   update_date = models.DateTimeField(default=datetime.datetime(2011,1,1))
-  text = models.TextField()
+  text = models.TextField(null=True)
+  textid = models.CharField(max_length=20, null=True)
+  commenttext = models.TextField(null=True, db_column="comment")
+  commentid = models.CharField(max_length=20, null=True)
+
 
   class OutOfQuota(Exception):
     pass
@@ -310,3 +314,26 @@ class Candidate(models.Model):
         return "Yes"
     elif self.managed == False:
         return "Manual"
+
+
+  def comment(self, text, retweet=False):
+    if not self.textid: return
+    api = SinaWeibo.get_by_user(self.user).get_api()
+    try:
+        r = api.comment(id=self.textid, comment=text)
+    except WeibopError, e:
+        #不能重复提交两次相同的内容
+        if hasattr(e,'code') and e.code=='40025': 
+            text = u"[呵呵]" + text
+            r = api.comment(id=self.textid, comment=text)
+        else:
+            print e
+            raise e
+    self.commenttext = text
+    self.commentid = r.id
+    if retweet:
+        api.repost(id=self.textid, status=text)
+    self.save()
+
+  def been_commented(self):
+    return bool(self.commenttext)

@@ -107,6 +107,7 @@ class CollectionService(object):
             if (new_rating > o.priority):
                 o.priority = new_rating
                 o.text = weibo.text
+                o.textid = str(weibo.id)
                 o.save()
 
 
