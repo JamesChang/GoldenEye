@@ -188,7 +188,7 @@ $(document).ready(function(){
     
     /*shift多选*/
     var lastChecked = null;
-    $('table :checkbox').live('click', function(){
+    $('table tr .check :checkbox').live('click', function(){
         if ($(this).prop('checked')) {
         
             $(this).parents('tr').addClass('selected');
@@ -199,7 +199,7 @@ $(document).ready(function(){
             }
             
             if (event.shiftKey) {
-                var $chkbox = $('.mainContent table :checkbox');
+                var $chkbox = $('table tr .check :checkbox');
                 var end = $chkbox.index($(this));
                 var start = $chkbox.index(lastChecked);
                 
@@ -242,20 +242,21 @@ $(document).ready(function(){
     });
     
     /*翻页*/
-    $('.prev').die().live('click', function(){
-        if (!$(this).hasClass('prevPageDisable')) {
-            window.location.href = '#/' + (new Number(pageNumber) - 1);
-        }
-        return false;
-    });
-    
-    $('.next').die().live('click', function(){
-        if (!$(this).hasClass('nextPageDisable')) {
-            window.location.href = '#/' + (new Number(pageNumber) + 1);
-        }
-        return false;
-    });
-    
+    /*
+     $('.prev').die().live('click', function(){
+     if (!$(this).hasClass('prevPageDisable')) {
+     window.location.href = '#/' + (new Number(pageNumber) - 1);
+     }
+     return false;
+     });
+     
+     $('.next').die().live('click', function(){
+     if (!$(this).hasClass('nextPageDisable')) {
+     window.location.href = '#/' + (new Number(pageNumber) + 1);
+     }
+     return false;
+     });
+     */
     /*关注*/
     $('.followHandle').die().live('click', function(){
         candidateFollow(checkItem(), function(data){
@@ -308,6 +309,85 @@ $(document).ready(function(){
         return false;
     });
     
+    $('.mainContent table tr').live({
+        mouseenter: function(){
+            $(this).find('.comment').css('opacity', 1);
+        },
+        mouseleave: function(){
+            $(this).find('.comment').css('opacity', 0);
+        }
+    });
+    
+    $('.comment').live('click', function(){
+        var $tr = $(this).parents('tr');
+        if ($tr.find('.commentPanel').length > 0) {
+            $tr.find('.commentPanel').remove();
+            $(this).html('评论&darr;');
+        }
+        else {
+            var h = $('.commentPanel').html();
+            $tr.children('td:last-child').append('<div class="commentPanel">' + h + '</div>');
+            $tr.find('.commentPanel').show();
+            $tr.find('.commentPanel .commentInput').focus();
+            $(this).html('评论&uarr;');
+        }
+        return false;
+    });
+    
+    $('.commentPanel .dropdownHandle').live('click', function(e){
+        e.stopPropagation();
+        showDropdownList($(this), 'bottom');
+    });
+    
+    $("#datepicker").datepicker({
+        closeText: '关闭',
+        prevText: '&#x3c;上月',
+        nextText: '下月&#x3e;',
+        currentText: '今天',
+        monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        monthNamesShort: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
+        dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+        dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+        dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
+        weekHeader: '周',
+        dateFormat: 'yy年mm月dd日',
+        firstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: true,
+        yearSuffix: '年',
+        showButtonPanel: true
+    });
+    
+    $("#datepicker").datepicker("setDate", "+0d");
+    
+    var today = new Date();
+    
+    $('.prev').live('click', function(){
+        var a = $.datepicker.parseDate('yy年mm月dd日', $('#datepicker').val()) - new Date();
+        a = Math.ceil(a / (1000 * 60 * 60 * 24)) - 1;
+        if (a == 0) {
+            $("#datepicker").datepicker("setDate", "+0d");
+        }
+        else {
+        
+            $("#datepicker").datepicker("setDate", a);
+        }
+        return false;
+    });
+    
+    $('.next').live('click', function(){
+        var a = $.datepicker.parseDate('yy年mm月dd日', $('#datepicker').val()) - new Date();
+        a = Math.ceil(a / (1000 * 60 * 60 * 24)) + 1;
+        if (a == 0) {
+            $("#datepicker").datepicker("setDate", "+0d");
+        }
+        else {
+        
+            $("#datepicker").datepicker("setDate", a);
+        }
+        return false;
+    });
+    
     /*
      $('.tag').each(function(i){
      setTimeout(function(){
@@ -354,12 +434,14 @@ function loadPage(_pageNumber){
             weiboCard();
         });
         
-        pageButton(data.candidate_page);
-        
-        pageInfo(data.candidate_page, function(data){
-            $('.itemNum').html(data);
-        });
-        
+        /*
+         pageButton(data.candidate_page);
+         */
+        /*
+         pageInfo(data.candidate_page, function(data){
+         $('.itemNum').html(data);
+         });
+         */
         tipRenderer(data.daily);
         
         bindTip();
@@ -482,7 +564,7 @@ function candidatesRenderer(obj, callback){
         var h = '';
         $.each(obj, function(entryIndex, entry){
             h += entry['managed'] == null ? '<tr class="unread">' : '<tr>';
-            h += '<td>' + '<input id="' + entry['id'] + '" type="checkbox">' + '</td>';
+            h += '<td class="check">' + '<input id="' + entry['id'] + '" type="checkbox">' + '</td>';
             h += '<td class="name" ' + 'wb_screen_name=' + entry['name'] + '>' + entry['name'] + '</td>';
             h += '<td>';
             if (entry['following'] && entry['followed_back']) {
@@ -499,16 +581,25 @@ function candidatesRenderer(obj, callback){
                     else {
                         h += '<span>' + '</span>';
                     }
-            if (entry['managed'] == null) {
-                h += '<span>' + '</span>';
+            
+            if (Math.random() > 0.5) {
+                h += '<a class="comment" href="#">' + '评论&darr;' + '</a>';
             }
-            else 
-                if (entry['managed']) {
-                    h += '<span class="tags mandatory">' + '</span>';
-                }
-                else {
-                    h += '<span class="tags freedom">' + '</span>';
-                }
+            else {
+                h += '<span class="tags reviewed"></span>';
+            }
+            /*
+             if (entry['managed'] == null) {
+             h += '<span>' + '</span>';
+             }
+             else
+             if (entry['managed']) {
+             h += '<span class="tags mandatory">' + '</span>';
+             }
+             else {
+             h += '<span class="tags freedom">' + '</span>';
+             }
+             */
             h += '</td>';
             h += '<td class="text">';
             h += entry['text'] ? entry['text'] : "";
@@ -690,10 +781,12 @@ function pollingFollowed(callback){
             console.log(data.daily.found);
             numberBoardAnimate($('.count .followNumber span'), data.daily.followed, function(){
                 if (data.daily.found != 0) {
-                    setTimeout('f()', 5000);
+                    setTimeout(function(){
+                        f();
+                    }, 5000);
                 }
                 else 
-                    if ($('.error')) {
+                    if ($('.error') != []) {
                         callback();
                     }
                     else {
@@ -703,5 +796,7 @@ function pollingFollowed(callback){
         });
     }
     
-    setTimeout('f()', 2000);
+    setTimeout(function(){
+        f();
+    }, 2000);
 }

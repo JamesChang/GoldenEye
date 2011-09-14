@@ -3,6 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="style/default.css">
+        <link rel="stylesheet" type="text/css" href="style/themes/smoothness/jquery.ui.all.css">
         <!--[if lte IE 7]>
             <link rel="stylesheet" type="text/css" href="style/ie.css">
         <![endif]-->
@@ -58,40 +59,35 @@
             <div class="primary">
                 <div class="operateBar top">
                     <div class="buttonBox">
-                        <div class="button checkboxOp dropdownHandle">
+                        <div class="button checkboxOp">
                             <input type="checkbox">
                         </div>
-                        <ul class="dropdownList">
-                            <li>
-                                <a href="#">未处理</a>
-                            </li>
-                        </ul>
                     </div>
                     <div class="buttonBox">
-                        <div class="button normalBtn followHandle">
+                        <div class="button normalBtn">
                             关注
                         </div>
-                        <div class="button dropdownBtn dropdownHandle">
+                        <div class="button middleBtn">
+                            取消关注
                         </div>
-                        <ul class="dropdownList">
-                            <li>
-                                <a href="#" class="unfollowHandle">取消关注</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="buttonBox">
-                        <div class="button normalBtn manageHandle">
-                            托管
+                        <div class="button lastBtn">
+                            不当人选
                         </div>
-                        <div class="button dropdownBtn dropdownHandle">
-                        </div>
-                        <ul class="dropdownList">
-                            <li>
-                                <a href="#" class="unmanageHandle">取消托管</a>
-                            </li>
-                        </ul>
                     </div>
                     <!--
+                    <div class="buttonBox">
+                    <div class="button normalBtn manageHandle">
+                    托管
+                    </div>
+                    <div class="button dropdownBtn dropdownHandle">
+                    </div>
+                    <ul class="dropdownList">
+                    <li>
+                    <a href="#" class="unmanageHandle">取消托管</a>
+                    </li>
+                    </ul>
+                    </div>
+                    --><!--
                     <div class="buttonBox">
                     <div class="button tagsFilterBtn dropdownHandle">
                     标签过滤
@@ -115,22 +111,23 @@
                     </li>
                     </ul>
                     </div>
-                    -->
+                    --><!--
                     <div class="buttonBox nameSearch">
-                        <div class="button tagsFilterBtn dropdownHandle">
-                            昵称搜索
-                        </div>
-                        <ul class="dropdownList">
-                            <li>
-                                <input type="text">
-                            </li>
-                            <li class="divideLineSolid">
-                            </li>
-                            <li>
-                                <a href="#">搜索</a>
-                            </li>
-                        </ul>
+                    <div class="button tagsFilterBtn dropdownHandle">
+                    昵称搜索
                     </div>
+                    <ul class="dropdownList">
+                    <li>
+                    <input type="text">
+                    </li>
+                    <li class="divideLineSolid">
+                    </li>
+                    <li>
+                    <a href="#">搜索</a>
+                    </li>
+                    </ul>
+                    </div>
+                    -->
                     <div class="buttonBox pageBtn">
                         <div class="button prevPage prev">
                         </div>
@@ -138,6 +135,7 @@
                         </div>
                     </div>
                     <div class="itemNum">
+                        <input type="text" id="datepicker" readonly="readonly" />
                     </div>
                 </div>
                 <div class="mainContent">
@@ -242,22 +240,23 @@
                     </li>
                     </ul>
                     </div>
-                    -->
+                    --><!--
                     <div class="buttonBox nameSearch">
-                        <div class="button tagsFilterBtn dropdownHandle">
-                            昵称搜索
-                        </div>
-                        <ul class="dropdownList">
-                            <li>
-                                <input type="text">
-                            </li>
-                            <li class="divideLineSolid">
-                            </li>
-                            <li>
-                                <a href="#">搜索</a>
-                            </li>
-                        </ul>
+                    <div class="button tagsFilterBtn dropdownHandle">
+                    昵称搜索
                     </div>
+                    <ul class="dropdownList">
+                    <li>
+                    <input type="text">
+                    </li>
+                    <li class="divideLineSolid">
+                    </li>
+                    <li>
+                    <a href="#">搜索</a>
+                    </li>
+                    </ul>
+                    </div>
+                    -->
                     <div class="buttonBox pageBtn">
                         <div class="button prevPage prev">
                         </div>
@@ -265,6 +264,7 @@
                         </div>
                     </div>
                     <div class="itemNum">
+                        2011年9月13日
                     </div>
                 </div>
             </div>
@@ -284,11 +284,16 @@
                             <a href="#" id="followMutualHandle">互相关注</a>
                         </li>
                         <li>
-                            <a href="#" id="manageHandle">托管</a>
+                            <a href="#" id="junkCandidate">不当人选</a>
+                        </li>
+                        <!--
+                        <li>
+                        <a href="#" id="manageHandle">托管</a>
                         </li>
                         <li>
-                            <a href="#" id="unmanageHandle">不托管</a>
+                        <a href="#" id="unmanageHandle">不托管</a>
                         </li>
+                        -->
                     </ul>
                 </div>
                 <div class="searchKeyword">
@@ -493,6 +498,32 @@
                 </li>
                 <br class="clear"/>
             </ul>
+        </div>
+        <div class="commentPanel">
+            <input class="commentInput" type="text" />
+            <div>
+                <input id="isForward" type="checkbox"/>
+                <label for="isForward">
+                    同时转发到我的微博
+                </label>
+                <a href="#" class="commentSubmit">评论</a>
+                <div class="buttonBox">
+                    <div class="button tagsFilterBtn dropdownHandle">
+                        常用评论
+                    </div>
+                    <ul class="dropdownList">
+                        <li>
+                            同时转发到我的微博同时转发到我的微博时转发到我的微博
+                        </li>
+                        <li>
+                            同时转发到我的微博同时转发到我的微
+                        </li>
+                        <li>
+                            同时转发到我的微博同的微
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </body>
 </html>

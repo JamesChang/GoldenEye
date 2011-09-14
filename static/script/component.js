@@ -11,11 +11,14 @@ $(document).ready(function(){
     });
     
     $(document).click(function(e){
-        if (!(e.target.nodeName == "INPUT")) {
-            hideDropdownList();
-        }
+        /*
+         if (!(e.target.nodeName == "INPUT")) {
+         hideDropdownList();
+         }
+         */
+        hideDropdownList();
     });
-	
+    
 });
 
 function showDropdownList(obj, position){

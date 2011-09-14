@@ -250,6 +250,9 @@ input:focus {
 
 .normalButton:hover {
     background-position: -190px -471px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .cancelButton {
@@ -265,6 +268,9 @@ input:focus {
 
 .cancelButton:hover {
     background-position: -660px -471px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 /*
@@ -532,7 +538,12 @@ input:focus {
 
 .secondary .mainFilter ul li:first-child a {
     border-bottom: 1px dashed #d3d3d3;
-    padding: 8px 4px;
+    padding: 10px 4px;
+}
+
+.secondary .mainFilter ul li:last-child a {
+    border-top: 1px dashed #d3d3d3;
+    padding: 10px 4px;
 }
 
 .secondary .mainFilter ul li a:hover {
@@ -649,25 +660,41 @@ input:focus {
     display: inline-block;
 }
 
+/*
+ .checkboxOp {
+ width: 45px;
+ background: url(../image/button.png) no-repeat 0 -60px;
+ }
+ 
+ .checkboxOp:hover {
+ background-position: -45px -60px;
+ box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+ -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+ -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .checkboxOp:active {
+ background-position: -90px -60px;
+ }
+ */
 .checkboxOp {
-    width: 45px;
-    background: url(../image/button.png) no-repeat 0 -60px;
+    width: 30px;
+    background: url(../image/button.png) no-repeat -135px -60px;
 }
 
 .checkboxOp:hover {
-    background-position: -45px -60px;
+    background-position: -165px -60px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
 }
 
 .checkboxOp:active {
-    background-position: -90px -60px;
+    background-position: -195px -60px;
 }
 
 .checkboxOp input {
     margin-top: 9px;
-    margin-left: -15px;
 }
 
 .normalBtn {
@@ -688,6 +715,50 @@ input:focus {
 
 .normalBtn:active {
     background-position: -100px -150px;
+    color: #1A1A1A;
+}
+
+.middleBtn {
+    width: 74px;
+    background: url(../image/button.png) no-repeat -150px -150px;
+    color: #4d4d4d;
+    position: relative;
+    left: -1px;
+}
+
+.middleBtn:hover {
+    background-position: -224px -150px;
+    color: #1A1A1A;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.middleBtn:active {
+    background-position: -298px -150px;
+    color: #1A1A1A;
+}
+
+.lastBtn {
+    width: 74px;
+    background: url(../image/button.png) no-repeat -372px -150px;
+    color: #4d4d4d;
+    position: relative;
+    left: -2px;
+}
+
+.lastBtn:hover {
+    background-position: -446px -150px;
+    color: #1A1A1A;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.lastBtn:active {
+    background-position: -520px -150px;
     color: #1A1A1A;
 }
 
@@ -795,6 +866,32 @@ input:focus {
     display: inline-block;
 }
 
+#datepicker {
+    border: 1px solid transparent;
+    outline: none;
+    line-height: 28px;
+    width: 97px;
+    padding: 0;
+    text-align: center;
+}
+
+#datepicker:hover {
+    border: 1px solid #787878;
+}
+
+#datepicker:focus {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.ui-datepicker {
+    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+    font-size: 10px !important;
+}
+
 .pageBtn {
     float: right;
 }
@@ -830,6 +927,7 @@ input:focus {
     height: 36px;
     background-color: #f5f5f5;
     border-bottom: 1px solid #bfbfbf;
+    vertical-align: text-top;
 }
 
 .primary .mainContent table tr .name {
@@ -838,6 +936,7 @@ input:focus {
 
 .primary .mainContent table tr .text {
     text-align: left;
+    padding-right: 10px;
 }
 
 .primary .mainContent table tr:first-child {
@@ -857,7 +956,7 @@ input:focus {
 }
 
 .primary .mainContent table td {
-    padding: 5px 2px;
+    padding: 5px 3px;
 }
 
 .primary .mainContent table tr td:first-child {
@@ -868,7 +967,7 @@ input:focus {
     border: 1px solid #c7e8fb;
     background-color: #ecf7fd;
     padding: 15px 150px;
-    margin-bottom: 20px;
+    margin: auto 10px 20px 10px;
     display: none;
 }
 
@@ -958,6 +1057,20 @@ input:focus {
     background-position: -45px -285px;
 }
 
+.comment {
+    display: inline-block;
+    line-height: 20px;
+    width: 45px;
+    margin: 0 1px;
+    text-align: center;
+    opacity: 0;
+}
+
+.reviewed {
+    width: 45px;
+    background-position: -90px -285px;
+}
+
 /*
  index 左侧栏
  */
@@ -1015,12 +1128,6 @@ input:focus {
     padding-right: 10px;
     padding-left: 10px;
     width: 980px;
-}
-
-.comment {
-    margin: 8px 0;
-    color: #696969;
-    line-height: 20px;
 }
 
 .secondary .followBox {
@@ -1287,6 +1394,66 @@ input:focus {
     left: -16px;
     top: 3px;
     z-index: 10;
+}
+
+.commentPanel {
+    width: 495px;
+    height: 75px;
+    background: url(../image/button.png) no-repeat 0 -572px;
+    padding: 15px 10px 10px 10px;
+    margin: 5px auto 10px auto;
+    display: none;
+}
+
+.commentPanel .commentInput {
+    height: 25px;
+    width: 487px;
+    padding: 3px;
+    margin-bottom: 10px;
+}
+
+.commentPanel label {
+    line-height: 30px;
+}
+
+.commentPanel .commentSubmit {
+    display: block;
+    width: 75px;
+    height: 30px;
+    background: url(../image/button.png) no-repeat -578px -572px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
+    color: #ffffff;
+    float: right;
+}
+
+.commentPanel .commentSubmit:hover {
+    background-position: -578px -602px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 999;
+}
+
+.commentPanel .buttonBox {
+    float: right;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.commentPanel .buttonBox .dropdownList {
+    width: 250px;
+}
+
+.commentPanel .buttonBox .dropdownList li {
+    padding: 6px 4px;
+}
+
+.commentPanel .buttonBox .dropdownList li:hover {
+    background-color: #4394dc;
+    color: #ffffff;
 }
 
 /*
