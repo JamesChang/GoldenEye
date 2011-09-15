@@ -147,7 +147,7 @@ class SinaWeibo(models.Model):
     #followed = [row[1] for row in rows]
 
      
-    cursor.execute("""select date(follow_date), count(*) from home_candidate where user_id = %s and followed_back and follow_date >= %s GROUP BY date(follow_date) """, [self.user.id, upper_date]) 
+    cursor.execute("""select date(follow_date), count(*) from home_candidate where user_id = %s and ever_followed_back and follow_date >= %s GROUP BY date(follow_date) """, [self.user.id, upper_date]) 
     rows = cursor.fetchall()
     #following_back = [row[1] for row in rows]
     for row in rows:
@@ -207,6 +207,7 @@ class Candidate(models.Model):
   follow_date = models.DateTimeField(null=True)
   unfollow_date = models.DateTimeField(null=True)
   following = models.NullBooleanField(null=True)
+  ever_followed_back = models.NullBooleanField(null=False, default=False)
   followed_back = models.NullBooleanField(null=True)
   followed_back_date = models.DateTimeField(null=True)
   managed = models.NullBooleanField()
@@ -295,6 +296,7 @@ class Candidate(models.Model):
         self.following = source.following
       if not self.followed_back and source.followed_by:
         self.followed_back_date = datetime.datetime.now()
+        self.ever_followed_back = True
       if self.followed_back and not source.followed_by:
         logger.info("UNFO %s by %s" % (source.screen_name, target.screen_name))
       if (self.followed_back != source.followed_by):
