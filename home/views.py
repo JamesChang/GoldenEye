@@ -197,6 +197,7 @@ def candidate_vo(obj):
             'managed': obj.managed,
             'text':obj.text,
             'commented': obj.been_commented(),
+            'commenttext':obj.commenttext,
             }
 
 def page_vo(paginator, page):
