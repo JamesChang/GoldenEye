@@ -587,7 +587,8 @@ function candidatesRenderer(obj, callback){
         $.each(obj, function(entryIndex, entry){
             h += entry['managed'] == null ? '<tr class="unread">' : '<tr>';
             h += '<td class="check">' + '<input id="' + entry['id'] + '" type="checkbox">' + '</td>';
-            h += '<td class="name" ' + 'wb_screen_name=' + entry['name'] + '>' + entry['name'] + '</td>';
+            //h += '<td class="name" ' + 'wb_screen_name=' + entry['name'] + '>' + entry['name'] + '</td>';
+            h += '<td class="name">' + '<span ' + 'wb_screen_name=' + entry['name'] + '>' + entry['name'] + '</span>' + '</td>';
             h += '<td>';
             if (entry['following'] && entry['followed_back']) {
                 h += '<span class="tags followBothway">' + '</span>';
@@ -696,7 +697,7 @@ function weiboCard(){
         WB.connect.init(cfg);
         WB.client.init(cfg);
         
-        $('.name').each(function(index){
+        $('.name span').each(function(index){
             WB.widget.atWhere.blogAt($(this).get(0));
         });
     });
