@@ -11,13 +11,12 @@
 }
 
 .checkboxOp input {
-    margin-left: -15px;
     margin-top: 0;
 }
 
 .primary .mainContent table td {
     border-bottom: 1px solid #bfbfbf;
-    padding: 0;
+    padding-bottom: 0;
 }
 
 .primary .mainContent table {
@@ -50,3 +49,6 @@
 .tip {
     height: 180px;
 }
+
+
+

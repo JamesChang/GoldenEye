@@ -24,7 +24,7 @@
         </script>
         <title>听我说 - 发现潜在粉丝 让中国听你说</title>
     </head>
-    <body id="search">
+    <body id="search" class="hide">
         <div class="content">
             <div class="tip">
                 <p class="tipLabel">
@@ -64,10 +64,10 @@
                         </div>
                     </div>
                     <div class="buttonBox">
-                        <div class="button normalBtn">
+                        <div class="button normalBtn followHandle">
                             关注
                         </div>
-                        <div class="button middleBtn">
+                        <div class="button middleBtn unfollowHandle">
                             取消关注
                         </div>
                         <div class="button lastBtn">
@@ -502,10 +502,6 @@
         <div class="commentPanel">
             <input class="commentInput" type="text" />
             <div>
-                <input id="isForward" type="checkbox"/>
-                <label for="isForward">
-                    同时转发到我的微博
-                </label>
                 <a href="#" class="commentSubmit">评论</a>
                 <div class="buttonBox">
                     <div class="button tagsFilterBtn dropdownHandle">
@@ -523,6 +519,10 @@
                         </li>
                     </ul>
                 </div>
+                <input id="isForward" type="checkbox"/>
+                <label for="isForward">
+                    同时转发到我的微博
+                </label>
             </div>
         </div>
     </body>

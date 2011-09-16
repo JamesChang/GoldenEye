@@ -25,14 +25,14 @@
             <li>
                 <a href="p/logout">退出</a>
             </li>
-<!--
+            <!--
             <li>
-                |
+            |
             </li>
             <li>
-                <a href="setting.html" class="setting">设置</a>
+            <a href="setting.html" class="setting">设置</a>
             </li>
--->
+            -->
         </ul>
     </div>
 </div>
@@ -40,7 +40,7 @@
     $(document).ready(function(){
         pagePool(1, '', function(data){
             $('.userBar li:first-child').html(data.me.name);
-            $('body').css('opacity', '100').css('filter', 'alpha(opacity=100)');
+            $('body').removeClass('hide');
         });
         
         $('.controlBar a').tipTip();

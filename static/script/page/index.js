@@ -220,10 +220,10 @@ $(document).ready(function(){
         hideDropdownList();
         
         if ($(this).prop('checked')) {
-            $('table :checkbox').prop('checked', true).parents('tr').addClass('selected');
+            $('table tr .check :checkbox').prop('checked', true).parents('tr').addClass('selected');
         }
         else {
-            $('table :checkbox').prop('checked', false).parents('tr').removeClass('selected');
+            $('table tr .check :checkbox').prop('checked', false).parents('tr').removeClass('selected');
         }
     });
     
@@ -311,10 +311,10 @@ $(document).ready(function(){
     
     $('.mainContent table tr').live({
         mouseenter: function(){
-            $(this).find('.comment').css('opacity', 1);
+            $(this).find('.comment').removeClass('hide');
         },
         mouseleave: function(){
-            $(this).find('.comment').css('opacity', 0);
+            $(this).find('.comment').addClass('hide');
         }
     });
     
@@ -327,8 +327,12 @@ $(document).ready(function(){
         else {
             var h = $('.commentPanel').html();
             $tr.children('td:last-child').append('<div class="commentPanel">' + h + '</div>');
-            $tr.find('.commentPanel').show();
-            $tr.find('.commentPanel .commentInput').focus();
+            var id = $tr.children('.check').children('input').attr('id');
+            var $commentPanel = $tr.find('.commentPanel');
+            $commentPanel.find(':checkbox').attr('id', 'isForward' + '_' + id);
+            $commentPanel.find('label').attr('for', 'isForward' + '_' + id);
+            $commentPanel.show();
+            $commentPanel.find('.commentInput').focus();
             $(this).html('评论&uarr;');
         }
         return false;
@@ -339,12 +343,28 @@ $(document).ready(function(){
         showDropdownList($(this), 'bottom');
     });
     
+    $('.commentPanel .commentSubmit').live('click', function(){
+        var candidateID = $(this).parents('td').siblings('.check').find('input').attr('id');
+        var text = $(this).parents('td').find('.commentInput').val();
+        var $commentPanel = $(this).parents('.commentPanel');
+        var $tag = $(this).parents('tr').find('td').eq(2);
+        var isForward = $(this).siblings(':checkbox').prop('checked');
+        var retweet = (isForward ? 1 : 0);
+        candidateComment('["' + candidateID + '"]', text, retweet, function(data){
+            $commentPanel.remove();
+            $tag.find('a.comment').remove();
+            $('<span class="tags reviewed" title="' + text + '"></span>').appendTo($tag);
+            bindCommentTip();
+        });
+        return false;
+    });
+    
     $("#datepicker").datepicker({
         closeText: '关闭',
         prevText: '&#x3c;上月',
         nextText: '下月&#x3e;',
         currentText: '今天',
-        monthNames: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+        monthNames: ['01月', '02月', '03月', '04月', '05月', '06月', '07月', '08月', '09月', '10月', '11月', '12月'],
         monthNamesShort: ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'],
         dayNames: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
         dayNamesShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
@@ -431,6 +451,7 @@ function loadPage(_pageNumber){
         });
         candidatesRenderer(data.candidates, function(data){
             $('.mainContent').html(data);
+            bindCommentTip();
             weiboCard();
         });
         
@@ -476,6 +497,7 @@ function refreshCandidates(_pageNumber){
     pagePool(_pageNumber, filter, function(data){
         candidatesRenderer(data.candidates, function(data){
             $('.mainContent').html(data);
+            bindCommentTip();
             weiboCard();
         });
         
@@ -579,14 +601,14 @@ function candidatesRenderer(obj, callback){
                         h += '<span class="tags followBack">' + '</span>';
                     }
                     else {
-                        h += '<span>' + '</span>';
+                        h += '<span class="tags followBack hide">' + '</span>';
                     }
             
-            if (Math.random() > 0.5) {
-                h += '<a class="comment" href="#">' + '评论&darr;' + '</a>';
+            if (entry['commented']) {
+                h += '<span class="tags reviewed" title="' + entry['commenttext'] + '"></span>';
             }
             else {
-                h += '<span class="tags reviewed"></span>';
+                h += '<a class="comment hide" href="#">' + '评论&darr;' + '</a>';
             }
             /*
              if (entry['managed'] == null) {
@@ -771,6 +793,12 @@ function tipRenderer(obj){
 
 function bindTip(){
     $('.tag').tipTip({
+        defaultPosition: 'top'
+    });
+}
+
+function bindCommentTip(){
+    $('.reviewed').tipTip({
         defaultPosition: 'top'
     });
 }

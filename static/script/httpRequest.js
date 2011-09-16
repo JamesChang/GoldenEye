@@ -139,6 +139,18 @@ function keywordUpdate(obj, callback){
     }, 'json');
 }
 
+function candidateComment(obj, text, retweet, callback){
+    $.post(hostname + stem + '/candidate.comment/', {
+        "candidates": obj,
+        "text": text,
+        "retweet": retweet
+    }, function(data){
+        if (httpRequestCode(data.response.code) == "success") {
+            callback(data);
+        }
+    }, 'json');
+}
+
 function pageAnalysis(callback){
     $.getJSON(hostname + stem + '/page.analysis/', {}, function(data){
         if (httpRequestCode(data.response.code) == "success") {
