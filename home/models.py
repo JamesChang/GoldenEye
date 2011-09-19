@@ -216,6 +216,7 @@ class Candidate(models.Model):
   textid = models.CharField(max_length=20, null=True)
   commenttext = models.TextField(null=True, db_column="comment")
   commentid = models.CharField(max_length=20, null=True)
+  bad = models.BooleanField(null=False, default=False)
 
 
   class OutOfQuota(Exception):
@@ -241,12 +242,12 @@ class Candidate(models.Model):
     delta = datetime.timedelta(0, daily_reset_time.hour * 3600 +  daily_reset_time.minute*60)
     s = d + delta
     e = s + datetime.timedelta(1)
-    query = cls.objects.filter(user = user).filter(follow_date__gt=s).filter(follow_date__lt=e)
+    query = cls.objects.filter(user = user).filter(follow_date__gt=s).filter(follow_date__lt=e).filter(bad=False)
     return query
 
   @classmethod
   def get_user_new(cls, user):
-    query = cls.get_by_user(user).filter(managed__isnull=True)
+    query = cls.get_by_user(user).filter(managed__isnull=True).filter(bad=False)
     return query
 
   def handle_exception(self, exp):

@@ -455,3 +455,14 @@ def comment(request, form):
     
 
 
+@apply_form(CandidatesForm)
+@rest_login_required
+def bad(request, form):
+    ids = form.cleaned_data['candidates']    
+    for i in ids:
+        weiboid, userid = i.split('-')
+        c = Candidate.get_by_id(userid, weiboid)
+        c.bad=True
+        c.managed=False
+        c.save()
+    return make_json_response(request)
