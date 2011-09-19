@@ -1,12 +1,12 @@
-var pageNumber;
+var date = '';
 var filter = '';
-var noResult = '没找到符合条件的潜在粉丝，请稍后再来看看。';
+var noResult = '没找到符合条件的人选。';
 var found;
 
 $(document).ready(function(){
 
     $('.updateKeywordHandle').die().live('click', function(){
-        pagePool(pageNumber, filter, function(data){
+        pagePool('', filter, function(data){
             keywordsPopupRenderer(data.keywords, function(data){
                 $('#updateKeywordPanel .searchKeyword .tagsList').html(data);
             });
@@ -260,28 +260,28 @@ $(document).ready(function(){
     /*关注*/
     $('.followHandle').die().live('click', function(){
         candidateFollow(checkItem(), function(data){
-            refreshCandidates(pageNumber);
+            refreshCandidates(date);
         });
     });
     
     /*取消关注*/
     $('.unfollowHandle').die().live('click', function(){
         candidateUnfollow(checkItem(), function(data){
-            refreshCandidates(pageNumber);
+            refreshCandidates(date);
         });
     });
     
     /*托管*/
     $('.manageHandle').die().live('click', function(){
         candidateManage(checkItem(), function(data){
-            refreshCandidates(pageNumber);
+            refreshCandidates(date);
         });
     });
     
     /*取消托管*/
     $('.unmanageHandle').die().live('click', function(){
         candidateUnmanage(checkItem(), function(data){
-            refreshCandidates(pageNumber);
+            refreshCandidates(date);
         });
     });
     
@@ -304,8 +304,7 @@ $(document).ready(function(){
         var s = new String($(this).attr('id'));
         pageHandle = s.replace('Handle', '');
         filterSwitch(pageHandle);
-        refreshCandidates(1);
-        window.location.href = '#/1';
+        refreshCandidates(date);
         return false;
     });
     
@@ -359,7 +358,7 @@ $(document).ready(function(){
         return false;
     });
     
-    $("#datepicker").datepicker({
+    $(".datepicker").datepicker({
         closeText: '关闭',
         prevText: '&#x3c;上月',
         nextText: '下月&#x3e;',
@@ -375,36 +374,49 @@ $(document).ready(function(){
         isRTL: false,
         showMonthAfterYear: true,
         yearSuffix: '年',
-        showButtonPanel: true
+        showButtonPanel: true,
+        maxDate: '+0d',
+        onSelect: function(dateText, inst){
+            var d = $.datepicker.parseDate('yy年mm月dd日', dateText);
+            window.location.href = "#/" + $.datepicker.formatDate('yy-mm-dd', d);
+        }
     });
-    
-    $("#datepicker").datepicker("setDate", "+0d");
     
     var today = new Date();
     
-    $('.prev').live('click', function(){
-        var a = $.datepicker.parseDate('yy年mm月dd日', $('#datepicker').val()) - new Date();
+    $('.prev').die().live('click', function(){
+        var a = $.datepicker.parseDate('yy年mm月dd日', $('.datepicker').val()) - new Date();
         a = Math.ceil(a / (1000 * 60 * 60 * 24)) - 1;
         if (a == 0) {
-            $("#datepicker").datepicker("setDate", "+0d");
+            $(".datepicker").datepicker("setDate", "+0d");
         }
         else {
         
-            $("#datepicker").datepicker("setDate", a);
+            $(".datepicker").datepicker("setDate", a);
         }
+        
+        var d = $(".datepicker").datepicker("getDate");
+        
+        window.location.href = "#/" + $.datepicker.formatDate('yy-mm-dd', d);
+        
         return false;
     });
     
-    $('.next').live('click', function(){
-        var a = $.datepicker.parseDate('yy年mm月dd日', $('#datepicker').val()) - new Date();
+    $('.next').die().live('click', function(){
+        var a = $.datepicker.parseDate('yy年mm月dd日', $('.datepicker').val()) - new Date();
         a = Math.ceil(a / (1000 * 60 * 60 * 24)) + 1;
         if (a == 0) {
-            $("#datepicker").datepicker("setDate", "+0d");
+            $(".datepicker").datepicker("setDate", "+0d");
         }
         else {
         
-            $("#datepicker").datepicker("setDate", a);
+            $(".datepicker").datepicker("setDate", a);
         }
+        
+        var d = $(".datepicker").datepicker("getDate");
+        
+        window.location.href = "#/" + $.datepicker.formatDate('yy-mm-dd', d);
+        
         return false;
     });
     
@@ -433,18 +445,28 @@ $(document).ready(function(){
     
     /*派发地址栏获取事件*/
     $.address.init().change(function(){
-        pageNumber = $.address.pathNames()[0] ? $.address.pathNames()[0] : 1;
+        date = $.address.pathNames()[0] ? $.address.pathNames()[0] : '';
         
         $('.checkboxOp :checkbox').prop('checked', false);
         
+        if (date == '') {
+            $(".datepicker").datepicker("setDate", "+0d");
+        }
+        else {
+            var d = $.datepicker.parseDate('yy-mm-dd', date);
+            $(".datepicker").datepicker("setDate", d);
+        }
+        
+        $('.logo').focus();
+        
         /*载入相关分页*/
-        loadPage(pageNumber);
+        loadPage(date);
     });
     
 });
 
-function loadPage(_pageNumber){
-    pagePool(_pageNumber, filter, function(data){
+function loadPage(_date){
+    pagePool(_date, filter, function(data){
     
         keywordsRenderer(data.keywords, function(data){
             $('.secondary .searchKeyword').html(data);
@@ -454,6 +476,8 @@ function loadPage(_pageNumber){
             bindCommentTip();
             weiboCard();
         });
+        
+        pageButton(_date);
         
         /*
          pageButton(data.candidate_page);
@@ -493,26 +517,30 @@ function showWizard(obj){
     }
 }
 
-function refreshCandidates(_pageNumber){
-    pagePool(_pageNumber, filter, function(data){
+function refreshCandidates(_date){
+    pagePool(_date, filter, function(data){
         candidatesRenderer(data.candidates, function(data){
             $('.mainContent').html(data);
             bindCommentTip();
             weiboCard();
         });
         
-        pageButton(data.candidate_page);
+        pageButton(_date);
         
-        pageInfo(data.candidate_page, function(data){
-            $('.itemNum').html(data);
-        });
-        
+        /*
+         pageButton(data.candidate_page);
+         */
+        /*
+         pageInfo(data.candidate_page, function(data){
+         $('.itemNum').html(data);
+         });
+         */
         $('.checkboxOp :checkbox').prop('checked', false);
     });
 }
 
 function refreshKeywords(){
-    pagePool(1, filter, function(data){
+    pagePool('', filter, function(data){
         keywordsRenderer(data.keywords, function(data){
             $('.secondary .searchKeyword').html(data);
         });
@@ -524,7 +552,7 @@ function filterSwitch(_filter){
     switch (_filter) {
         case 'index':
             filter = '';
-            noResult = '没找到符合条件的潜在粉丝，请稍后再来看看。';
+            noResult = '没找到符合条件的潜在粉丝。';
             break;
         case 'follow':
             filter = '?following__exact=1';
@@ -640,20 +668,14 @@ function candidatesRenderer(obj, callback){
     }
 }
 
-function pageButton(obj){
-    if (obj) {
-        if (obj.has_previous) {
-            $('.prev').removeClass('prevPageDisable').addClass('prevPage');
-        }
-        else {
-            $('.prev').removeClass('prevPage').addClass('prevPageDisable');
-        }
-        if (obj.has_next) {
-            $('.next').removeClass('nextPageDisable').addClass('nextPage');
-        }
-        else {
-            $('.next').removeClass('nextPage').addClass('nextPageDisable');
-        }
+function pageButton(_date){
+    var a = $.datepicker.parseDate('yy-mm-dd', _date) - new Date();
+    a = Math.ceil(a / (1000 * 60 * 60 * 24));
+    if (a != 0) {
+        $('.next').removeClass('nextPageDisable').addClass('nextPage');
+    }
+    else {
+        $('.next').removeClass('nextPage').addClass('nextPageDisable');
     }
 }
 
@@ -806,7 +828,7 @@ function bindCommentTip(){
 
 function pollingFollowed(callback){
     var f = function(){
-        pagePool(1, filter, function(data){
+        pagePool('', filter, function(data){
             console.log(data.daily.found);
             numberBoardAnimate($('.count .followNumber span'), data.daily.followed, function(){
                 if (data.daily.found != 0) {

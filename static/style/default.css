@@ -362,6 +362,7 @@ input:focus {
     float: left;
     margin-top: 5px;
     background: url(../image/logo.png) no-repeat;
+    outline: none;
 }
 
 .header h1 {
@@ -866,8 +867,8 @@ input:focus {
     display: inline-block;
 }
 
-#datepicker {
-    border: 1px solid transparent;
+.datepicker {
+    border: 1px solid transparent !important;
     outline: none;
     line-height: 28px;
     height: 28px;
@@ -877,14 +878,15 @@ input:focus {
     cursor: pointer;
 }
 
-#datepicker:hover {
-    border: 1px solid #787878;
+.datepicker:hover {
+    border: 1px solid #787878 !important;
 }
 
-#datepicker:focus {
+.datepicker:focus {
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
+    border: 1px solid transparent !important;
 }
 
 .ui-datepicker {

@@ -38,7 +38,7 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        pagePool(1, '', function(data){
+        pagePool('', '', function(data){
             $('.userBar li:first-child').html(data.me.name);
             $('body').removeClass('hide');
         });
