@@ -115,7 +115,6 @@ $(document).ready(function(){
             $('.tip').slideUp('def', function(){
                 showSuccessTip('已成功关注了' + found + '人');
             });
-            window.location.href = '#/1';
         });
         return false;
     });
