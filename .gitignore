@@ -1,3 +1,4 @@
 *.log
 *.pyc
 nohup.out
+.tmp*

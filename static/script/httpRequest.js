@@ -61,14 +61,23 @@ function httpRequestCode(code){
             }
 }
 
-function pagePool(page, filter, callback){
-    $.getJSON(hostname + stem + '/page.pool/' + filter, {
-        "page": page
-    }, function(data){
-        if (httpRequestCode(data.response.code) == "success") {
-            callback(data);
-        }
-    });
+function pagePool(date, filter, callback){
+    if (date != '') {
+        $.getJSON(hostname + stem + '/page.pool/' + filter, {
+            "date": date
+        }, function(data){
+            if (httpRequestCode(data.response.code) == "success") {
+                callback(data);
+            }
+        });
+    }
+    else {
+        $.getJSON(hostname + stem + '/page.pool/' + filter, {}, function(data){
+            if (httpRequestCode(data.response.code) == "success") {
+                callback(data);
+            }
+        });
+    }
 }
 
 function candidateFollow(obj, callback){
