@@ -2,6 +2,7 @@
 import logging
 import json
 import functools
+import datetime, time
 
 from django.shortcuts import render_to_response
 from django.template import Context, loader
@@ -213,23 +214,46 @@ def page_vo(paginator, page):
             }
 @rest_login_required
 def page_pool(request):
+    date_format = "%Y-%m-%d"
+    from home.models import daily_today
 
     me = request.user
     sina = SinaWeibo.get_by_user(me)
     keywords = [keyword_vo(k) for k in Keyword.objects.filter(sina=sina)]
+    
+    n = daily_today()
+    strdate = request.REQUEST.get('date',n.strftime(date_format))
+    date=datetime.datetime.strptime(strdate, date_format)
+    if (n.year == date.year and n.month == date.month and n.day == date.day):
+        add_new_candidate =  True
+    else:
+        add_new_candidate = False
 
-    candidates = Candidate.get_by_user(me).order_by("-follow_date")
+    candidates = Candidate.get_by_user_date(me, date)
+
+    #    candidates = Candidate.get_by_user(me).order_by("-follow_date")
     field_lookups = [k  for k in request.REQUEST.keys() if k.find('__')>=0]
     if field_lookups:
         for k in field_lookups:
             candidates = candidates.filter(**dict(((k,request.REQUEST[k]),)))
-    perpage  = int(request.REQUEST.get('perpage','25'))
-    page  = int(request.REQUEST.get('page','1'))
-    candidate_paginator = Paginator(candidates, perpage)
-    try:
-        candidates_page = candidate_paginator.page(page)
-    except (InvalidPage, EmptyPage):
-        candidates_page = candidate_paginator.page(paginator.num_pages)
+
+#    dates = list(Candidate.get_by_user(me).dates('follow_date','day'))
+#    dates.sort(reverse=True)
+    candidate_page = {
+        'date':date.strftime(date_format),
+    }
+    if add_new_candidate and not field_lookups:
+        remained = sina.daily_remained_quota
+        candidates = list(candidates)
+        new_c = Candidate.get_user_new(me).order_by("-priority")[:remained]
+        candidates = list(new_c) + candidates
+#    perpage  = int(request.REQUEST.get('perpage','25'))
+#    page  = int(request.REQUEST.get('page','1'))
+#    candidate_paginator = Paginator(candidates, perpage)
+#    try:
+#        candidates_page = candidate_paginator.page(page)
+#    except (InvalidPage, EmptyPage):
+#        candidates_page = candidate_paginator.page(paginator.num_pages)
 
     #daily candidates
     found = Candidate.objects.filter(user=me).filter(managed__isnull=True).count()
@@ -243,8 +267,10 @@ def page_pool(request):
     result = {}
     result['me'] = user_vo(me)
     result['keywords'] = keywords
-    result['candidates'] = [candidate_vo(c) for c in candidates_page.object_list]
-    result['candidate_page'] = page_vo(candidate_paginator, candidates_page)
+ #   result['candidates'] = [candidate_vo(c) for c in candidates_page.object_list]
+#    result['candidate_page'] = page_vo(candidate_paginator, candidates_page)
+    result['candidates'] = [candidate_vo(c) for c in candidates]
+    result['candidate_page'] = candidate_page
     result['daily'] = daily_res
 
     return make_json_response(request, result)

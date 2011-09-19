@@ -19,7 +19,7 @@ def daily_today():
     if n.time() > daily_reset_time:
         return n.date()
     else:
-        return n - datetime.timedelta(1)
+        return (n - datetime.timedelta(1)).date()
 
 def handle_exception(self, exp):
     if not hasattr(exp, "code"):
@@ -234,6 +234,20 @@ class Candidate(models.Model):
   def get_by_user(cls, user):
     q = cls.objects.filter(user = user)
     return q
+
+
+  @classmethod
+  def get_by_user_date(cls, user, d):
+    delta = datetime.timedelta(0, daily_reset_time.hour * 3600 +  daily_reset_time.minute*60)
+    s = d + delta
+    e = s + datetime.timedelta(1)
+    query = cls.objects.filter(user = user).filter(follow_date__gt=s).filter(follow_date__lt=e)
+    return query
+
+  @classmethod
+  def get_user_new(cls, user):
+    query = cls.get_by_user(user).filter(managed__isnull=True)
+    return query
 
   def handle_exception(self, exp):
     c = exp.code
