@@ -160,6 +160,16 @@ function candidateComment(obj, text, retweet, callback){
     }, 'json');
 }
 
+function candidateBad(obj, callback){
+    $.post(hostname + stem + '/candidate.bad/', {
+        "candidates": obj
+    }, function(data){
+        if (httpRequestCode(data.response.code) == "success") {
+            callback(data);
+        }
+    }, 'json');
+}
+
 function pageAnalysis(callback){
     $.getJSON(hostname + stem + '/page.analysis/', {}, function(data){
         if (httpRequestCode(data.response.code) == "success") {

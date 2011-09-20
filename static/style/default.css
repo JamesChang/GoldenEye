@@ -931,7 +931,14 @@ input:focus {
     height: 36px;
     background-color: #f5f5f5;
     border-bottom: 1px solid #bfbfbf;
-    vertical-align: text-top;
+}
+
+.primary .mainContent table tr.noBottom {
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.primary .mainContent table tr.commentTr td {
+    padding: 0;
 }
 
 .primary .mainContent table tr .name {
@@ -1400,18 +1407,19 @@ input:focus {
 }
 
 .commentPanel {
-    width: 495px;
+    width: 550px;
     height: 75px;
     background: url(../image/button.png) no-repeat 0 -572px;
     padding: 15px 10px 10px 10px;
-    margin: 5px auto 10px auto;
+    margin: 0 auto 8px 70px;
     display: none;
+    text-align: left;
 }
 
 .commentPanel .commentInput {
     height: 25px;
     line-height: 25px;
-    width: 487px;
+    width: 540px;
     padding: 3px;
     margin-bottom: 10px;
 }

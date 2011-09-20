@@ -284,6 +284,13 @@ $(document).ready(function(){
         });
     });
     
+    /*不当人选*/
+    $('.badHandle').die().live('click', function(){
+        candidateBad(checkItem(), function(data){
+            refreshCandidates(date);
+        });
+    });
+    
     $('.secondary .tag').die().live({
         mouseenter: function(){
             $(this).children('.level').stop().animate({
@@ -307,26 +314,32 @@ $(document).ready(function(){
         return false;
     });
     
+    
     $('.mainContent table tr').live({
         mouseenter: function(){
             $(this).find('.comment').removeClass('hide');
         },
         mouseleave: function(){
-            $(this).find('.comment').addClass('hide');
+            if (!$(this).next().hasClass('commentTr')) {
+                $(this).find('.comment').addClass('hide');
+            }
         }
     });
     
     $('.comment').live('click', function(){
         var $tr = $(this).parents('tr');
-        if ($tr.find('.commentPanel').length > 0) {
-            $tr.find('.commentPanel').remove();
+        if ($tr.next().find('.commentPanel').length > 0) {
+            $tr.next().remove();
+            $tr.removeClass('noBottom');
             $(this).html('评论&darr;');
         }
         else {
             var h = $('.commentPanel').html();
-            $tr.children('td:last-child').append('<div class="commentPanel">' + h + '</div>');
+            $tr.addClass('noBottom');
+            $tr.after('<tr class="commentTr"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
+            //$tr.children('td:last-child').append('<div class="commentPanel">' + h + '</div>');
             var id = $tr.children('.check').children('input').attr('id');
-            var $commentPanel = $tr.find('.commentPanel');
+            var $commentPanel = $tr.next().find('.commentPanel');
             $commentPanel.find(':checkbox').attr('id', 'isForward' + '_' + id);
             $commentPanel.find('label').attr('for', 'isForward' + '_' + id);
             $commentPanel.show();
@@ -670,7 +683,7 @@ function candidatesRenderer(obj, callback){
 function pageButton(_date){
     var a = $.datepicker.parseDate('yy-mm-dd', _date) - new Date();
     a = Math.ceil(a / (1000 * 60 * 60 * 24));
-    if (a != 0) {
+    if (a != 0 && _date != '') {
         $('.next').removeClass('nextPageDisable').addClass('nextPage');
     }
     else {
@@ -849,4 +862,15 @@ function pollingFollowed(callback){
     setTimeout(function(){
         f();
     }, 2000);
+}
+
+function bindCommentButton(obj){
+    obj.live({
+        mouseenter: function(){
+            $(this).find('.comment').removeClass('hide');
+        },
+        mouseleave: function(){
+            $(this).find('.comment').addClass('hide');
+        }
+    });
 }
