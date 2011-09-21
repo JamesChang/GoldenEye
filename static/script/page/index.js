@@ -336,8 +336,13 @@ $(document).ready(function(){
         else {
             var h = $('.commentPanel').html();
             $tr.addClass('noBottom');
-            $tr.after('<tr class="commentTr"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
-            //$tr.children('td:last-child').append('<div class="commentPanel">' + h + '</div>');
+            if ($tr.hasClass('unread')) {
+                $tr.after('<tr class="commentTr unread"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
+                
+            }
+            else {
+                $tr.after('<tr class="commentTr"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
+            }
             var id = $tr.children('.check').children('input').attr('id');
             var $commentPanel = $tr.next().find('.commentPanel');
             $commentPanel.find(':checkbox').attr('id', 'isForward' + '_' + id);

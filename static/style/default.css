@@ -934,7 +934,7 @@ input:focus {
 }
 
 .primary .mainContent table tr.noBottom {
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: none;
 }
 
 .primary .mainContent table tr.commentTr td {
