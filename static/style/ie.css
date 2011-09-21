@@ -27,6 +27,10 @@
     border-top: 1px solid #bfbfbf;
 }
 
+.commentPanel {
+    margin-right: 0;
+}
+
 .divideLineSolid, .divideLine {
     height: 2px;
     line-height: 2px;
@@ -48,6 +52,10 @@
 
 .tip {
     height: 180px;
+}
+
+a {
+    blur: expression(this.blur());
 }
 
 

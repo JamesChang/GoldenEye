@@ -113,7 +113,7 @@ $(document).ready(function(){
         });
         pollingFollowed(function(){
             $('.tip').slideUp('def', function(){
-                showSuccessTip('已成功关注了' + found + '人');
+                showSuccessTip('已成功关注了 ' + found + ' 人');
             });
         });
         return false;
@@ -336,12 +336,20 @@ $(document).ready(function(){
         else {
             var h = $('.commentPanel').html();
             $tr.addClass('noBottom');
+            /*
+             if ($tr.hasClass('unread')) {
+             $tr.after('<tr class="commentTr unread"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
+             
+             }
+             else {
+             $tr.after('<tr class="commentTr"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
+             }
+             */
             if ($tr.hasClass('unread')) {
-                $tr.after('<tr class="commentTr unread"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
-                
+                $tr.after('<tr class="commentTr unread"><td colspan="4"><div class="commentPanel">' + h + '</div></td></tr>');
             }
             else {
-                $tr.after('<tr class="commentTr"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
+                $tr.after('<tr class="commentTr"><td colspan="4"><div class="commentPanel">' + h + '</div></td></tr>');
             }
             var id = $tr.children('.check').children('input').attr('id');
             var $commentPanel = $tr.next().find('.commentPanel');

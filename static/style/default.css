@@ -937,6 +937,10 @@ input:focus {
     border-bottom: none;
 }
 
+.primary .mainContent table tr.noBottom td {
+    border-bottom: none;
+}
+
 .primary .mainContent table tr.commentTr td {
     padding: 0;
 }
@@ -1411,7 +1415,9 @@ input:focus {
     height: 75px;
     background: url(../image/button.png) no-repeat 0 -572px;
     padding: 15px 10px 10px 10px;
-    margin: 0 auto 8px 70px;
+    margin-bottom: 8px;
+    float: right;
+    margin-right: 8px;
     display: none;
     text-align: left;
 }
