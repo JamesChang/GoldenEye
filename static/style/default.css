@@ -1246,6 +1246,7 @@ input:focus {
     padding-right: 10px;
     padding-left: 10px;
     width: 980px;
+    text-align: center;
 }
 
 /*
@@ -1258,41 +1259,42 @@ input:focus {
  */
 .loginBg {
     width: 990px;
-    height: 530px;
-    text-align: center;
+    height: 410px;
 }
 
 .sinaLogin {
-    display: inline-block;
+    display: block;
     width: 173px;
     height: 32px;
     background: url(../image/button.png) no-repeat 0 -419px;
 }
 
 .tencentLogin {
-    display: inline-block;
+    display: block;
     width: 173px;
     height: 32px;
     background: url(../image/button.png) no-repeat -173px -419px;
 }
 
 .tencentDisable {
-    display: inline-block;
+    display: block;
     width: 173px;
     height: 32px;
     background: url(../image/button.png) no-repeat -347px -419px;
 }
 
 #login .loginButton {
-    position: absolute;
-    top: 450px;
-    left: 365px;
-    z-index: 99999;
+    display: inline-block;
+    position: relative;
+    left: 8px;
 }
 
 #login .loginButton li {
     float: left;
-    margin: 0 100px;
+}
+
+#login .loginButton li:first-child {
+    margin-right: 100px;
 }
 
 /*
@@ -1691,7 +1693,8 @@ input:focus {
 .nivo-controlNav {
 	position: absolute;
 	left: 450px;
-	bottom: 120px;
+	bottom: 20px;
+	z-index:9999;
 }
 .nivo-controlNav a {
     display:block;

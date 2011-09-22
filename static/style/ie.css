@@ -1,7 +1,7 @@
 /*
  inline-block fixed
  */
-#login .loginBg ul, #login .loginBg ul a, .header .headerControl, .number, .tags, .account .accountList li, .popup .buttonBar .okButton, .popup .buttonBar, .deleteButton, .searchBox .searchKeyword #addKeyword, .tagsList li, .tip .count {
+#login .loginBg ul, #login .loginBg ul a, .header .headerControl, .number, .tags, .account .accountList li, .popup .buttonBar .okButton, .popup .buttonBar, .deleteButton, .searchBox .searchKeyword #addKeyword, .tagsList li, .tip .count,#login .loginButton {
     zoom: 1;
     display: inline;
 }
