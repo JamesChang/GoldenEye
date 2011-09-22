@@ -1248,10 +1248,17 @@ input:focus {
     width: 980px;
 }
 
+/*
+ .loginBg {
+ width: 990px;
+ height: 530px;
+ background: url(../image/loginBg.png) no-repeat top left;
+ text-align: center;
+ }
+ */
 .loginBg {
     width: 990px;
     height: 530px;
-    background: url(../image/loginBg.png) no-repeat top left;
     text-align: center;
 }
 
@@ -1269,12 +1276,21 @@ input:focus {
     background: url(../image/button.png) no-repeat -173px -419px;
 }
 
-#login .loginBg ul {
+.tencentDisable {
     display: inline-block;
-    margin-top: 400px;
+    width: 173px;
+    height: 32px;
+    background: url(../image/button.png) no-repeat -347px -419px;
 }
 
-#login .loginBg ul li {
+#login .loginButton {
+    position: absolute;
+    top: 450px;
+    left: 365px;
+    z-index: 99999;
+}
+
+#login .loginButton li {
     float: left;
     margin: 0 100px;
 }
@@ -1579,4 +1595,114 @@ input:focus {
 	#tiptip_holder.tip_top #tiptip_arrow_inner { 
 		border-top-color: #454545;
 	}
+}
+
+/* The Nivo Slider styles */
+.nivoSlider {
+    position: relative;
+}
+
+.nivoSlider img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+/* If an image is wrapped in a link */
+.nivoSlider a.nivo-imageLink {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    z-index: 6;
+    display: none;
+}
+
+/* The slices and boxes in the Slider */
+.nivo-slice {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    height: 100%;
+}
+
+.nivo-box {
+    display: block;
+    position: absolute;
+    z-index: 5;
+}
+
+/* Caption styles */
+.nivo-caption {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    background: #000;
+    color: #fff;
+    opacity: 0.8; /* Overridden by captionOpacity setting */
+    width: 100%;
+    z-index: 8;
+}
+
+.nivo-caption p {
+    padding: 5px;
+    margin: 0;
+}
+
+.nivo-caption a {
+    display: inline !important;
+}
+
+.nivo-html-caption {
+    display: none;
+}
+
+/* Direction nav styles (e.g. Next & Prev) */
+.nivo-directionNav a {
+    position: absolute;
+    top: 45%;
+    z-index: 9;
+    cursor: pointer;
+}
+
+.nivo-prevNav {
+    left: 0px;
+}
+
+.nivo-nextNav {
+    right: 0px;
+}
+
+/* Control nav styles (e.g. 1,2,3...) */
+.nivo-controlNav a {
+    position: relative;
+    z-index: 9;
+    cursor: pointer;
+}
+
+.nivo-controlNav a.active {
+    font-weight: bold;
+}
+
+.nivo-controlNav {
+	position: absolute;
+	left: 450px;
+	bottom: 120px;
+}
+.nivo-controlNav a {
+    display:block;
+    width:22px;
+    height:22px;
+    background:url(../image/bullets.png) no-repeat;
+    text-indent:-9999px;
+    border:0;
+    margin-right:3px;
+    float:left;
+}
+.nivo-controlNav a.active {
+    background-position:0 -22px;
 }
