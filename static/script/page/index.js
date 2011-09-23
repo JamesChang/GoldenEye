@@ -40,7 +40,7 @@ $(document).ready(function(){
             var $input = $('#updateKeywordPanel .inputKeyword');
             if ($input.val()) {
                 var h = "<li class='tag'>";
-                h += "<span class='label'>" + $input.val() + "</span>";
+                h += "<span class='label' value='" + $input.val() + "'>" + $input.val() + "</span>";
                 h += "<span class='deleteButton'></span>";
                 h += "</li>";
                 $input.siblings('.tagsList').append(h);
