@@ -1301,6 +1301,7 @@ input:focus {
 #faq .tip {
     display: block;
     padding-left: 30px;
+    height: auto;
 }
 
 #faq .tip ul {
