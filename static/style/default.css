@@ -1297,6 +1297,48 @@ input:focus {
     margin-right: 100px;
 }
 
+/*faq*/
+#faq .tip {
+    display: block;
+    padding-left: 30px;
+}
+
+#faq .tip ul {
+    color: #1E69B8;
+}
+
+#faq .tip ul li {
+    margin-top: 10px;
+    list-style: square inside;
+}
+
+#faq .tip ul li:first-child {
+    margin-top: 0;
+}
+
+#faq .primary {
+    width: 960px;
+}
+
+#faq .primary .faqList .faqItem {
+    margin-top: 20px;
+}
+
+#faq .primary .question {
+    color: #1E69B8;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#faq .primary .answer {
+    line-height: 25px;
+}
+
+#faq .primary .answer ul li {
+    list-style: square inside;
+}
+
 /*
  popup
  */
@@ -1341,7 +1383,7 @@ input:focus {
 }
 
 .instruction ul li {
-    list-style: decimal inside;
+    list-style: decimal;
     line-height: 28px;
     color: #676767;
 }
