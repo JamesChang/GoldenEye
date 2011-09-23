@@ -291,6 +291,7 @@ $(document).ready(function(){
         });
     });
     
+/*
     $('.secondary .tag').die().live({
         mouseenter: function(){
             $(this).children('.level').stop().animate({
@@ -303,6 +304,7 @@ $(document).ready(function(){
             });
         }
     });
+*/
     
     $('.mainFilter ul li a').click(function(){
         $(this).parents('ul').find('a').removeClass('selected');
