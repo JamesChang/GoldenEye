@@ -2,7 +2,7 @@ function showSuccessTip(label){
     if ($('.loading')) {
         $('.loading').remove();
     }
-    $('<div class="loading success"></div>').html('<span>' + label + ' （￣▽￣）</span>').appendTo('body');
+    $('<div class="loading success"></div>').html('<span>' + label + ' （^o^）</span>').appendTo('body');
     setTimeout(function(){
         $('.success').remove();
     }, 3000);
@@ -21,6 +21,7 @@ function showErrorTip(label){
 function cutString(string, num){
     var s = new String(string);
     var l = s.replace(/[^\x00-\xff]/g, '**').length;
+    console.log(s + '/' + l);
     if (l > num) {
         for (var i = 0; i < l; i++) {
             if (s.substr(0, i).replace(/[^\x00-\xff]/g, "**").length >= num) {
