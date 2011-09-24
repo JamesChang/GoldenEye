@@ -33,11 +33,11 @@ $(document).ready(function(){
         });
         
         $('#updateKeywordPanel .okButton').die().live('click', function(){
-            if ($('#updateKeywordPanel .tagsList li').length == 0) {
+            var $input = $('#updateKeywordPanel .inputKeyword');
+            if ($('#updateKeywordPanel .tagsList li').length == 0 && !$input.val()) {
                 $('.errorTip').show();
                 return false;
             }
-            var $input = $('#updateKeywordPanel .inputKeyword');
             if ($input.val()) {
                 var h = "<li class='tag'>";
                 h += "<span class='label' value='" + $input.val() + "'>" + $input.val() + "</span>";
@@ -78,14 +78,14 @@ $(document).ready(function(){
     });
     
     $('#wizardPanel .page2 .okButton').die().live('click', function(){
-        if ($('#wizardPanel .tagsList li').length == 0) {
+        var $input = $('#updateKeywordPanel .inputKeyword');
+        if ($('#updateKeywordPanel .tagsList li').length == 0 && !$input.val()) {
             $('.errorTip').show();
             return false;
         }
-        var $input = $('#wizardPanel .inputKeyword');
         if ($input.val()) {
             var h = "<li class='tag'>";
-            h += "<span class='label'>" + $input.val() + "</span>";
+            h += "<span class='label' value='" + $input.val() + "'>" + $input.val() + "</span>";
             h += "<span class='deleteButton'></span>";
             h += "</li>";
             $input.siblings('.tagsList').append(h);
@@ -291,21 +291,20 @@ $(document).ready(function(){
         });
     });
     
-/*
-    $('.secondary .tag').die().live({
-        mouseenter: function(){
-            $(this).children('.level').stop().animate({
-                left: 100
-            });
-        },
-        mouseleave: function(){
-            $(this).children('.level').stop().animate({
-                left: 73
-            });
-        }
-    });
-*/
-    
+    /*
+     $('.secondary .tag').die().live({
+     mouseenter: function(){
+     $(this).children('.level').stop().animate({
+     left: 100
+     });
+     },
+     mouseleave: function(){
+     $(this).children('.level').stop().animate({
+     left: 73
+     });
+     }
+     });
+     */
     $('.mainFilter ul li a').click(function(){
         $(this).parents('ul').find('a').removeClass('selected');
         $(this).addClass('selected');
