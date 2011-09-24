@@ -120,7 +120,7 @@ $(document).ready(function(){
     });
     
     $('.addKeyword').click(function(){
-        $('.errorTip').hide();
+        $('.errorTip,.normalTip').hide();
         $(this).siblings('.tagsList').children('li:last-child').children('.label').removeClass('selected');
         $(this).hide().siblings('input').show().css('width', '120px').focus();
         return false;
@@ -540,6 +540,8 @@ function showWizard(obj){
             },
             focusInput: false
         });
+        
+        $('#wizardPanel .normalTip').show();
     }
 }
 

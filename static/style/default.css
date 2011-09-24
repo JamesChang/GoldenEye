@@ -1408,6 +1408,13 @@ input:focus {
     display: none;
 }
 
+.searchBox .normalTip {
+    line-height: 20px;
+    color: #676767;
+    text-align: center;
+    display: none;
+}
+
 .searchBox .searchKeyword {
     height: 78px;
     border: 1px solid #a3a3a3;
