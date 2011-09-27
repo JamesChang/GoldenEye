@@ -229,7 +229,6 @@ input:focus {
     width: 8px;
     height: 8px;
     background: url(../image/button.png) no-repeat -24px -407px;
-    vertical-align: middle;
     cursor: pointer;
 }
 
@@ -1478,7 +1477,7 @@ input:focus {
 .popup .tagsList span.deleteButton {
     position: relative;
     left: -16px;
-    top: 3px;
+    top: 5px;
     z-index: 10;
 }
 
