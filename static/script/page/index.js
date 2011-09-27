@@ -66,6 +66,8 @@ $(document).ready(function(){
         
         $('.cancelButton').click(function(){
             $.unblockUI();
+            $('#updateKeywordPanel .inputKeyword').val('').hide();
+            $('#updateKeywordPanel .addKeyword').show();
             return false;
         });
         
