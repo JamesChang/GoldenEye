@@ -246,7 +246,7 @@ def page_pool(request):
         remained = sina.daily_remained_quota
         candidates = list(candidates)
         new_c = Candidate.get_user_new(me).order_by("-priority")[:remained]
-        candidates = list(new_c) + candidates
+        candidates = candidates + list(new_c) 
 #    perpage  = int(request.REQUEST.get('perpage','25'))
 #    page  = int(request.REQUEST.get('page','1'))
 #    candidate_paginator = Paginator(candidates, perpage)
