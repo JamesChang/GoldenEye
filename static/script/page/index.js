@@ -375,7 +375,7 @@ $(document).ready(function(){
         var candidateID = $(this).parents('tr').prev().children('.check').find('input').attr('id');
         var text = $(this).parents('td').find('.commentInput').val();
         var $commentPanel = $(this).parents('.commentPanel');
-        var $tag = $(this).parents('tr').find('td').eq(2);
+        var $tag = $(this).parents('tr').prev().find('td').eq(2);
         var isForward = $(this).siblings(':checkbox').prop('checked');
         var retweet = (isForward ? 1 : 0);
         candidateComment('["' + candidateID + '"]', text, retweet, function(data){
