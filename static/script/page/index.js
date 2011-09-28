@@ -103,7 +103,7 @@ $(document).ready(function(){
         
         keywordUpdate(value, function(){
             refreshKeywords();
-            $('.mainContent').html('<span class="noResult">' + '已添加了话题。别急，让我先找会儿。' + '（＞﹏＜）' + '</span>');
+            $('.mainContent').html('<span class="noResult">' + '已添加了话题，我们会推荐最佳人选给你。所以别急，让我先多找会儿。' + '（＞﹏＜）' + '</span>');
             $.unblockUI();
         });
         
