@@ -372,6 +372,7 @@ $(document).ready(function(){
     });
     
     $('.commentPanel .commentSubmit').live('click', function(){
+		alert($(this).parents('tr').prev().children('.check').find('input').attr('id'))
         var candidateID = $(this).parents('td').siblings('.check').find('input').attr('id');
         var text = $(this).parents('td').find('.commentInput').val();
         var $commentPanel = $(this).parents('.commentPanel');
