@@ -1,6 +1,6 @@
 var date = '';
 var filter = '';
-var noResult = '没有找到符合条件的人选。';
+var noResult = '暂时没有找到符合条件的人选。请再多等待一会儿。';
 var found;
 
 $(document).ready(function(){
@@ -103,7 +103,7 @@ $(document).ready(function(){
         
         keywordUpdate(value, function(){
             refreshKeywords();
-            $('.mainContent').html('<span class="noResult">' + '已添加了话题，我们会推荐最佳人选给你。所以别急，让我先多找会儿。' + '（＞﹏＜）' + '</span>');
+            $('.mainContent').html('<span class="noResult">' + '已添加了话题。由于需要帮您寻找最佳人选，所以别急，让我多找一会儿，过几个小时再来看看。' + '（＞﹏＜）' + '</span>');
             $.unblockUI();
         });
         
@@ -583,7 +583,7 @@ function filterSwitch(_filter){
     switch (_filter) {
         case 'index':
             filter = '';
-            noResult = '没有找到符合条件的人选。';
+            noResult = '暂时没有找到符合条件的人选，请再多等待一会儿。';
             break;
         case 'follow':
             filter = '?following__exact=1';
