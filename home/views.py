@@ -449,7 +449,7 @@ def comment(request, form):
         c = Candidate.get_by_id(userid, weiboid)
         if c is None: continue
         c.comment(form.cleaned_data['text'], form.cleaned_data['retweet'])
-        c.managed=True
+    #    c.managed=True
         c.save()
     return make_json_response(request)
     
