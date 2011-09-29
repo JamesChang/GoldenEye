@@ -2,6 +2,7 @@
 import time, datetime, logging
 
 from home.models import *
+from weibopy.error import WeibopError
 
 def comb(items, n=None):
     if n is None: n=len(items)
@@ -44,7 +45,13 @@ class CollectionService(object):
         while(True):
             accounts = SinaWeibo.objects.all()
             for account in accounts:
-                self.search_one_account(account)
+                try:
+                    self.search_one_account(account)
+                except WeibopError,e:
+                    if hasattr(e,"code") and e.code == "40028":
+                        self.logger.error("Sina API Error %s"%e.reason)
+                    else:
+                        raise e
             time.sleep(self.idle_time)
 
     def get_threshood(self, sina):
