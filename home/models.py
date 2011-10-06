@@ -138,7 +138,7 @@ class SinaWeibo(models.Model):
     from django.db import connection, transaction
     cursor = connection.cursor()
     upper_date = (datetime.datetime.now() - datetime.timedelta(60)).date()
-    cursor.execute("""select date(follow_date), count(*) from home_candidate where user_id = %s and follow_date >= %s group by date(follow_date)""", [self.user.id, upper_date]) 
+    cursor.execute("""select date(mark_date), count(*) from home_candidate where user_id = %s and mark_date >= %s group by date(mark_date)""", [self.user.id, upper_date]) 
     rows = cursor.fetchall()
 
     data = dict((row[0], [row[1], 0]) for row in rows)
@@ -147,7 +147,7 @@ class SinaWeibo(models.Model):
     #followed = [row[1] for row in rows]
 
      
-    cursor.execute("""select date(follow_date), count(*) from home_candidate where user_id = %s and ever_followed_back and follow_date >= %s GROUP BY date(follow_date) """, [self.user.id, upper_date]) 
+    cursor.execute("""select date(mark_date), count(*) from home_candidate where user_id = %s and ever_followed_back and mark_date >= %s GROUP BY date(mark_date) """, [self.user.id, upper_date]) 
     rows = cursor.fetchall()
     #following_back = [row[1] for row in rows]
     for row in rows:
@@ -216,7 +216,10 @@ class Candidate(models.Model):
   textid = models.CharField(max_length=20, null=True)
   commenttext = models.TextField(null=True, db_column="comment")
   commentid = models.CharField(max_length=20, null=True)
+  comment_date = models.DateTimeField(null=True)
   bad = models.BooleanField(null=False, default=False)
+  mark_date = models.DateTimeField(null=True)
+
 
 
   class OutOfQuota(Exception):
@@ -242,7 +245,7 @@ class Candidate(models.Model):
     delta = datetime.timedelta(0, daily_reset_time.hour * 3600 +  daily_reset_time.minute*60)
     s = d + delta
     e = s + datetime.timedelta(1)
-    query = cls.objects.filter(user = user).filter(follow_date__gt=s).filter(follow_date__lt=e).filter(bad=False)
+    query = cls.objects.filter(user = user).filter(mark_date__gt=s).filter(mark_date__lt=e).filter(bad=False)
     return query
 
   @classmethod
@@ -271,7 +274,7 @@ class Candidate(models.Model):
         return
 #      print self.name, self.follow_date
       d = api.create_friendship(user_id = self.weiboid)
-      if self.follow_date is None:
+      if self.mark_date is None:
 #          print weibo.daily_followed
           weibo.check_reset_daily_quota()
           if check_quota and  weibo.daily_followed >= weibo.daily_quota:
@@ -279,6 +282,7 @@ class Candidate(models.Model):
           weibo.daily_followed +=1
 #          print weibo.daily_followed
           weibo.save()
+          self.mark_date = datetime.datetime.now()
       self.follow_date = datetime.datetime.now()
       self.following = True
       self.save()
@@ -333,9 +337,10 @@ class Candidate(models.Model):
         return "Manual"
 
 
-  def comment(self, text, retweet=False):
+  def comment(self, text, retweet=False, check_quota = True):
     if not self.textid: return
-    api = SinaWeibo.get_by_user(self.user).get_api()
+    weibo = SinaWeibo.get_by_user(self.user) 
+    api = weibo.get_api()
     try:
         r = api.comment(id=self.textid, comment=text)
     except WeibopError, e:
@@ -346,6 +351,14 @@ class Candidate(models.Model):
         else:
             print e
             raise e
+    if self.mark_date is None :
+        weibo.check_reset_daily_quota()
+        if check_quota and  weibo.daily_followed >= weibo.daily_quota:
+          raise self.OutOfQuota
+        weibo.daily_followed +=1
+        weibo.save()
+        self.mark_date = datetime.datetime.now()
+    self.comment_date = datetime.datetime.now()
     self.commenttext = text
     self.commentid = r.id
     if retweet:
