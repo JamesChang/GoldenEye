@@ -27,7 +27,8 @@ var followOptions = {
         crosshairs: true
     },
     legend: {
-        y: -30
+        x: -350,
+        y: -310
     },
     credits: {
         position: {

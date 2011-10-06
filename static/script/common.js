@@ -2,7 +2,7 @@ function showSuccessTip(label){
     if ($('.loading')) {
         $('.loading').remove();
     }
-    $('<div class="loading success"></div>').html('<span>' + label + ' （￣▽￣）</span>').appendTo('body');
+    $('<div class="loading success"></div>').html('<span>' + label + ' （^o^）</span>').appendTo('body');
     setTimeout(function(){
         $('.success').remove();
     }, 3000);

@@ -1,6 +1,6 @@
 var date = '';
 var filter = '';
-var noResult = '没找到符合条件的人选。';
+var noResult = '暂时没有找到符合条件的人选。';
 var found;
 
 $(document).ready(function(){
@@ -33,14 +33,14 @@ $(document).ready(function(){
         });
         
         $('#updateKeywordPanel .okButton').die().live('click', function(){
-            if ($('#updateKeywordPanel .tagsList li').length == 0) {
+            var $input = $('#updateKeywordPanel .inputKeyword');
+            if ($('#updateKeywordPanel .tagsList li').length == 0 && !$input.val()) {
                 $('.errorTip').show();
                 return false;
             }
-            var $input = $('#updateKeywordPanel .inputKeyword');
             if ($input.val()) {
                 var h = "<li class='tag'>";
-                h += "<span class='label'>" + $input.val() + "</span>";
+                h += "<span class='label' value='" + $input.val() + "'>" + $input.val() + "</span>";
                 h += "<span class='deleteButton'></span>";
                 h += "</li>";
                 $input.siblings('.tagsList').append(h);
@@ -66,6 +66,8 @@ $(document).ready(function(){
         
         $('.cancelButton').click(function(){
             $.unblockUI();
+            $('#updateKeywordPanel .inputKeyword').val('').hide();
+            $('#updateKeywordPanel .addKeyword').show();
             return false;
         });
         
@@ -78,14 +80,14 @@ $(document).ready(function(){
     });
     
     $('#wizardPanel .page2 .okButton').die().live('click', function(){
-        if ($('#wizardPanel .tagsList li').length == 0) {
+        var $input = $('#wizardPanel .inputKeyword');
+        if ($('#wizardPanel .tagsList li').length == 0 && !$input.val()) {
             $('.errorTip').show();
             return false;
         }
-        var $input = $('#wizardPanel .inputKeyword');
         if ($input.val()) {
             var h = "<li class='tag'>";
-            h += "<span class='label'>" + $input.val() + "</span>";
+            h += "<span class='label' value='" + $input.val() + "'>" + $input.val() + "</span>";
             h += "<span class='deleteButton'></span>";
             h += "</li>";
             $input.siblings('.tagsList').append(h);
@@ -101,6 +103,7 @@ $(document).ready(function(){
         
         keywordUpdate(value, function(){
             refreshKeywords();
+            $('.mainContent').html('<span class="noResult">' + '已开始为您寻找最佳人选。<br/>由于需要进行大量收集、计算及分析。所以别急，让我多找一会儿，过几个小时再来看看。' + '（＞﹏＜）' + '</span>');
             $.unblockUI();
         });
         
@@ -113,14 +116,14 @@ $(document).ready(function(){
         });
         pollingFollowed(function(){
             $('.tip').slideUp('def', function(){
-                showSuccessTip('已成功关注了' + found + '人');
+                showSuccessTip('已成功关注了 ' + found + ' 人');
             });
         });
         return false;
     });
     
     $('.addKeyword').click(function(){
-        $('.errorTip').hide();
+        $('.errorTip,.normalTip').hide();
         $(this).siblings('.tagsList').children('li:last-child').children('.label').removeClass('selected');
         $(this).hide().siblings('input').show().css('width', '120px').focus();
         return false;
@@ -128,7 +131,7 @@ $(document).ready(function(){
     
     $('.inputKeyword').keydown(function(e){
         if ($.browser.webkit) {
-            if (e.keyCode == 13 && $(this).val()) {
+            if ($(this).val() && (e.keyCode == 13 || e.keyCode == 220 || e.keyCode == 186 || e.keyCode == 188 || e.keyCode == 32)) {
                 var h = "<li class='tag' title='" + $(this).val() + "'>";
                 h += "<span class='label' value='" + $(this).val() + "'>" + cutString($(this).val(), 10) + "</span>";
                 h += "<span class='deleteButton'></span>";
@@ -156,7 +159,7 @@ $(document).ready(function(){
                 }
         }
         else {
-            if (e.keyCode == 13 && $(this).val()) {
+            if ($(this).val() && (e.keyCode == 13 || e.keyCode == 220 || e.keyCode == 186 || e.keyCode == 188 || e.keyCode == 32)) {
                 var h = "<li class='tag' title='" + $(this).val() + "'>";
                 h += "<span class='label' value='" + $(this).val() + "'>" + cutString($(this).val(), 10) + "</span>";
                 h += "<span class='deleteButton'></span>";
@@ -291,19 +294,20 @@ $(document).ready(function(){
         });
     });
     
-    $('.secondary .tag').die().live({
-        mouseenter: function(){
-            $(this).children('.level').stop().animate({
-                left: 100
-            });
-        },
-        mouseleave: function(){
-            $(this).children('.level').stop().animate({
-                left: 73
-            });
-        }
-    });
-    
+    /*
+     $('.secondary .tag').die().live({
+     mouseenter: function(){
+     $(this).children('.level').stop().animate({
+     left: 100
+     });
+     },
+     mouseleave: function(){
+     $(this).children('.level').stop().animate({
+     left: 73
+     });
+     }
+     });
+     */
     $('.mainFilter ul li a').click(function(){
         $(this).parents('ul').find('a').removeClass('selected');
         $(this).addClass('selected');
@@ -336,8 +340,21 @@ $(document).ready(function(){
         else {
             var h = $('.commentPanel').html();
             $tr.addClass('noBottom');
-            $tr.after('<tr class="commentTr"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
-            //$tr.children('td:last-child').append('<div class="commentPanel">' + h + '</div>');
+            /*
+             if ($tr.hasClass('unread')) {
+             $tr.after('<tr class="commentTr unread"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
+             
+             }
+             else {
+             $tr.after('<tr class="commentTr"><td></td><td></td><td colspan="2"><div class="commentPanel">' + h + '</div></td><td></td></tr>');
+             }
+             */
+            if ($tr.hasClass('unread')) {
+                $tr.after('<tr class="commentTr unread"><td colspan="4"><div class="commentPanel">' + h + '</div></td></tr>');
+            }
+            else {
+                $tr.after('<tr class="commentTr"><td colspan="4"><div class="commentPanel">' + h + '</div></td></tr>');
+            }
             var id = $tr.children('.check').children('input').attr('id');
             var $commentPanel = $tr.next().find('.commentPanel');
             $commentPanel.find(':checkbox').attr('id', 'isForward' + '_' + id);
@@ -355,10 +372,10 @@ $(document).ready(function(){
     });
     
     $('.commentPanel .commentSubmit').live('click', function(){
-        var candidateID = $(this).parents('td').siblings('.check').find('input').attr('id');
+        var candidateID = $(this).parents('tr').prev().children('.check').find('input').attr('id');
         var text = $(this).parents('td').find('.commentInput').val();
         var $commentPanel = $(this).parents('.commentPanel');
-        var $tag = $(this).parents('tr').find('td').eq(2);
+        var $tag = $(this).parents('tr').prev().find('td').eq(2);
         var isForward = $(this).siblings(':checkbox').prop('checked');
         var retweet = (isForward ? 1 : 0);
         candidateComment('["' + candidateID + '"]', text, retweet, function(data){
@@ -526,6 +543,8 @@ function showWizard(obj){
             },
             focusInput: false
         });
+        
+        $('#wizardPanel .normalTip').show();
     }
 }
 
@@ -564,11 +583,11 @@ function filterSwitch(_filter){
     switch (_filter) {
         case 'index':
             filter = '';
-            noResult = '没找到符合条件的潜在粉丝。';
+            noResult = '暂时没有找到符合条件的人选。';
             break;
         case 'follow':
             filter = '?following__exact=1';
-            noResult = '没有找到已经关注的人。'
+            noResult = '没有找到已关注的人。'
             break;
         case 'followBack':
             filter = '?followed_back__exact=1';

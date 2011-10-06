@@ -229,7 +229,6 @@ input:focus {
     width: 8px;
     height: 8px;
     background: url(../image/button.png) no-repeat -24px -407px;
-    vertical-align: middle;
     cursor: pointer;
 }
 
@@ -934,7 +933,11 @@ input:focus {
 }
 
 .primary .mainContent table tr.noBottom {
-    border-bottom: 1px solid #f5f5f5;
+    border-bottom: none;
+}
+
+.primary .mainContent table tr.noBottom td {
+    border-bottom: none;
 }
 
 .primary .mainContent table tr.commentTr td {
@@ -1242,37 +1245,98 @@ input:focus {
     padding-right: 10px;
     padding-left: 10px;
     width: 980px;
-}
-
-.loginBg {
-    width: 990px;
-    height: 530px;
-    background: url(../image/loginBg.png) no-repeat top left;
     text-align: center;
 }
 
+/*
+ .loginBg {
+ width: 990px;
+ height: 530px;
+ background: url(../image/loginBg.png) no-repeat top left;
+ text-align: center;
+ }
+ */
+.loginBg {
+    width: 990px;
+    height: 410px;
+}
+
 .sinaLogin {
-    display: inline-block;
+    display: block;
     width: 173px;
     height: 32px;
     background: url(../image/button.png) no-repeat 0 -419px;
 }
 
 .tencentLogin {
-    display: inline-block;
+    display: block;
     width: 173px;
     height: 32px;
     background: url(../image/button.png) no-repeat -173px -419px;
 }
 
-#login .loginBg ul {
-    display: inline-block;
-    margin-top: 400px;
+.tencentDisable {
+    display: block;
+    width: 173px;
+    height: 32px;
+    background: url(../image/button.png) no-repeat -347px -419px;
 }
 
-#login .loginBg ul li {
+#login .loginButton {
+    display: inline-block;
+    position: relative;
+    left: 8px;
+}
+
+#login .loginButton li {
     float: left;
-    margin: 0 100px;
+}
+
+#login .loginButton li:first-child {
+    margin-right: 100px;
+}
+
+/*faq*/
+#faq .tip {
+    display: block;
+    padding-left: 30px;
+    height: auto;
+}
+
+#faq .tip ul {
+    color: #1E69B8;
+}
+
+#faq .tip ul li {
+    margin-top: 10px;
+    list-style: square inside;
+}
+
+#faq .tip ul li:first-child {
+    margin-top: 0;
+}
+
+#faq .primary {
+    width: 960px;
+}
+
+#faq .primary .faqList .faqItem {
+    margin-top: 20px;
+}
+
+#faq .primary .question {
+    color: #1E69B8;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#faq .primary .answer {
+    line-height: 25px;
+}
+
+#faq .primary .answer ul li {
+    list-style: square inside;
 }
 
 /*
@@ -1319,9 +1383,13 @@ input:focus {
 }
 
 .instruction ul li {
-    list-style: decimal inside;
+    list-style: decimal;
     line-height: 28px;
     color: #676767;
+}
+
+.instruction:first-child ul li {
+    list-style: decimal inside;
 }
 
 .searchBox {
@@ -1335,6 +1403,13 @@ input:focus {
 .searchBox .errorTip {
     line-height: 20px;
     color: #FF0000;
+    text-align: center;
+    display: none;
+}
+
+.searchBox .normalTip {
+    line-height: 20px;
+    color: #676767;
     text-align: center;
     display: none;
 }
@@ -1402,7 +1477,7 @@ input:focus {
 .popup .tagsList span.deleteButton {
     position: relative;
     left: -16px;
-    top: 3px;
+    top: 5px;
     z-index: 10;
 }
 
@@ -1411,7 +1486,9 @@ input:focus {
     height: 75px;
     background: url(../image/button.png) no-repeat 0 -572px;
     padding: 15px 10px 10px 10px;
-    margin: 0 auto 8px 70px;
+    margin-bottom: 8px;
+    float: right;
+    margin-right: 8px;
     display: none;
     text-align: left;
 }
@@ -1573,4 +1650,115 @@ input:focus {
 	#tiptip_holder.tip_top #tiptip_arrow_inner { 
 		border-top-color: #454545;
 	}
+}
+
+/* The Nivo Slider styles */
+.nivoSlider {
+    position: relative;
+}
+
+.nivoSlider img {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+/* If an image is wrapped in a link */
+.nivoSlider a.nivo-imageLink {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    z-index: 6;
+    display: none;
+}
+
+/* The slices and boxes in the Slider */
+.nivo-slice {
+    display: block;
+    position: absolute;
+    z-index: 5;
+    height: 100%;
+}
+
+.nivo-box {
+    display: block;
+    position: absolute;
+    z-index: 5;
+}
+
+/* Caption styles */
+.nivo-caption {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    background: #000;
+    color: #fff;
+    opacity: 0.8; /* Overridden by captionOpacity setting */
+    width: 100%;
+    z-index: 8;
+}
+
+.nivo-caption p {
+    padding: 5px;
+    margin: 0;
+}
+
+.nivo-caption a {
+    display: inline !important;
+}
+
+.nivo-html-caption {
+    display: none;
+}
+
+/* Direction nav styles (e.g. Next & Prev) */
+.nivo-directionNav a {
+    position: absolute;
+    top: 45%;
+    z-index: 9;
+    cursor: pointer;
+}
+
+.nivo-prevNav {
+    left: 0px;
+}
+
+.nivo-nextNav {
+    right: 0px;
+}
+
+/* Control nav styles (e.g. 1,2,3...) */
+.nivo-controlNav a {
+    position: relative;
+    z-index: 9;
+    cursor: pointer;
+}
+
+.nivo-controlNav a.active {
+    font-weight: bold;
+}
+
+.nivo-controlNav {
+	position: absolute;
+	left: 450px;
+	bottom: 20px;
+	z-index:9999;
+}
+.nivo-controlNav a {
+    display:block;
+    width:22px;
+    height:22px;
+    background:url(../image/bullets.png) no-repeat;
+    text-indent:-9999px;
+    border:0;
+    margin-right:3px;
+    float:left;
+}
+.nivo-controlNav a.active {
+    background-position:0 -22px;
 }
