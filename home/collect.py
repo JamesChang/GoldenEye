@@ -110,7 +110,7 @@ class CollectionService(object):
                 o.user = user
                 o.save()
 
-            print new_rating, weibo.text, weibo.from_user, o.priority
+            #print new_rating, weibo.text, weibo.from_user, o.priority
             if (new_rating > o.priority):
                 o.priority = new_rating
                 o.text = weibo.text
