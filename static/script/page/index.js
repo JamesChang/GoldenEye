@@ -556,6 +556,8 @@ function refreshCandidates(_date){
             weiboCard();
         });
         
+        tipRenderer(data.daily);
+        
         pageButton(_date);
         
         /*
@@ -842,6 +844,9 @@ function tipRenderer(obj){
         $('.count .foundDailyNumber span').eq(2).removeClass().addClass('number').addClass('no' + dailyBit).attr('value', dailyBit);
         
         $('.tip').slideDown('def');
+    }
+    else {
+        $('.tip').slideUp('def');
     }
 }
 
