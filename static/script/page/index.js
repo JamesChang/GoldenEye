@@ -131,7 +131,7 @@ $(document).ready(function(){
     
     $('.inputKeyword').keydown(function(e){
         if ($.browser.webkit) {
-            if ($(this).val() && (e.keyCode == 13 || e.keyCode == 220 || e.keyCode == 186 || e.keyCode == 188 || e.keyCode == 32)) {
+            if ($(this).val() && (e.keyCode == 13 || e.keyCode == 220 || e.keyCode == 186 || e.keyCode == 188)) {
                 var h = "<li class='tag' title='" + $(this).val() + "'>";
                 h += "<span class='label' value='" + $(this).val() + "'>" + cutString($(this).val(), 10) + "</span>";
                 h += "<span class='deleteButton'></span>";
@@ -159,7 +159,7 @@ $(document).ready(function(){
                 }
         }
         else {
-            if ($(this).val() && (e.keyCode == 13 || e.keyCode == 220 || e.keyCode == 186 || e.keyCode == 188 || e.keyCode == 32)) {
+            if ($(this).val() && (e.keyCode == 13 || e.keyCode == 220 || e.keyCode == 186 || e.keyCode == 188)) {
                 var h = "<li class='tag' title='" + $(this).val() + "'>";
                 h += "<span class='label' value='" + $(this).val() + "'>" + cutString($(this).val(), 10) + "</span>";
                 h += "<span class='deleteButton'></span>";
@@ -383,6 +383,7 @@ $(document).ready(function(){
             $tag.find('a.comment').remove();
             $('<span class="tags reviewed" title="' + text + '"></span>').appendTo($tag);
             bindCommentTip();
+            refreshCandidates(date);
         });
         return false;
     });
