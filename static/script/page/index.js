@@ -188,11 +188,6 @@ $(document).ready(function(){
         $('.inputKeyword').focus();
     });
     
-    $('#wizardPanel .searchKeyword').click(function(){
-        $('.addKeyword').show();
-        $('.inputKeyword').hide();
-    });
-    
     /*shift多选*/
     var lastChecked = null;
     $('table tr .check :checkbox').live('click', function(){
