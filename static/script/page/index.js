@@ -80,6 +80,11 @@ $(document).ready(function(){
     });
     
     $('#wizardPanel .page2 .okButton').die().live('click', function(){
+        $('.sliderBox').scrollTo('.page3', 500);
+        return false;
+    });
+    
+    $('#wizardPanel .page3 .okButton').die().live('click', function(){
         var $input = $('#wizardPanel .inputKeyword');
         if ($('#wizardPanel .tagsList li').length == 0 && !$input.val()) {
             $('.errorTip').show();
@@ -95,7 +100,7 @@ $(document).ready(function(){
         }
         
         var obj = [];
-        $('#wizardPanel .page2 .searchKeyword .tagsList li').each(function(){
+        $('#wizardPanel .page3 .searchKeyword .tagsList li').each(function(){
             var s = $(this).children('.label').attr('value');
             obj.push('"' + s + '"');
         });

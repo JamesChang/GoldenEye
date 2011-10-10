@@ -1366,11 +1366,18 @@ input:focus {
     margin: 0 10px;
 }
 
-.welcome {
+.page1 .welcome {
     display: block;
     width: 683px;
     height: 310px;
-    background: url(../image/welcome.png) no-repeat top left;
+    background: url(../image/page1welcome.png) no-repeat top left;
+}
+
+.page2 .welcome {
+    display: block;
+    width: 683px;
+    height: 310px;
+    background: url(../image/page2welcome.png) no-repeat top left;
 }
 
 .instruction {
@@ -1455,10 +1462,10 @@ input:focus {
 }
 
 .popup .slider {
-    width: 2000px;
+    width: 3000px;
 }
 
-.popup .slider .page1, .popup .slider .page2 {
+.popup .slider .page1, .popup .slider .page2, .popup .slider .page3 {
     float: left;
     width: 683px;
 }
